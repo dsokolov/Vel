@@ -1,7 +1,10 @@
-package me.ilich.vel
+package me.ilich.vel.sources
 
 import android.content.Context
 import com.google.android.gms.location.LocationRequest
+import me.ilich.vel.Latitude
+import me.ilich.vel.Longitude
+import me.ilich.vel.Speed
 import pl.charmas.android.reactivelocation.ReactiveLocationProvider
 import rx.Observable
 import rx.schedulers.Schedulers

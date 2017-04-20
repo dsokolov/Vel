@@ -1,8 +1,12 @@
-package me.ilich.vel
+package me.ilich.vel.sources
 
 import android.hardware.Sensor
 import android.hardware.SensorManager
 import com.nvanbenschoten.rxsensor.RxSensorManager
+import me.ilich.vel.PitchDegree
+import me.ilich.vel.RollDegree
+import me.ilich.vel.YawDegree
+import me.ilich.vel.radToDeg
 import rx.Observable
 import rx.schedulers.Schedulers
 import java.util.concurrent.TimeUnit
