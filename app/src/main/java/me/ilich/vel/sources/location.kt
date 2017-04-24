@@ -9,19 +9,13 @@ import pl.charmas.android.reactivelocation.ReactiveLocationProvider
 import rx.Observable
 import rx.schedulers.Schedulers
 
-sealed class LocationData {
+data class LocationData(
+        val latitude: Latitude,
+        val longitude: Longitude,
+        val speed: Speed
+)
 
-    class Error : LocationData()
-
-    class Values(
-            val latitude: Latitude,
-            val longitude: Longitude,
-            val speed: Speed
-    ) : LocationData()
-
-}
-
-fun gpsObservable(context: Context): Observable<out LocationData> {
+fun gpsObservable(context: Context): Observable<LocationData> {
     val locationProvider = ReactiveLocationProvider(context)
     val locationRequest = LocationRequest.create().
             setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY).
@@ -29,7 +23,7 @@ fun gpsObservable(context: Context): Observable<out LocationData> {
     return locationProvider.getUpdatedLocation(locationRequest).
             subscribeOn(Schedulers.io()).
             map { location ->
-                LocationData.Values(
+                LocationData(
                         latitude = location.latitude,
                         longitude = location.longitude,
                         speed = location.speed
