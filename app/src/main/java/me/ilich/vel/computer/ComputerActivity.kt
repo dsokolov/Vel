@@ -8,11 +8,13 @@ import android.support.v7.app.AppCompatActivity
 import com.nvanbenschoten.rxsensor.RxSensorManager
 import com.tbruyelle.rxpermissions.RxPermissions
 import io.realm.Realm
-import me.ilich.vel.*
+import me.ilich.vel.RealmCalibration
+import me.ilich.vel.firstOrCreate
 import me.ilich.vel.sources.LocationData
 import me.ilich.vel.sources.OrientationData
 import me.ilich.vel.sources.gpsObservable
 import me.ilich.vel.sources.orientationObservable
+import me.ilich.vel.transactionObservable
 import rx.Observable
 import rx.Subscription
 import rx.android.schedulers.AndroidSchedulers
@@ -45,7 +47,8 @@ class ComputerActivity : AppCompatActivity() {
                         else -> Observable.fromCallable { }
                     }
                 }.subscribe()
-            }
+            },
+            activity = this
     )
 
 
@@ -64,7 +67,7 @@ class ComputerActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        view.onCreate(this, savedInstanceState)
+        view.onCreate(savedInstanceState)
 
         realm = Realm.getDefaultInstance()
 

@@ -43,6 +43,15 @@
             android:visibility="gone" />
 
         <TextView
+            android:id="@+id/state_ascent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="подъём"
+            android:textAlignment="center"
+            android:textColor="@android:color/white"
+            android:textSize="14sp" />
+
+        <TextView
             android:id="@+id/angel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -50,6 +59,15 @@
             android:textColor="@android:color/white"
             android:textSize="42sp"
             tools:text="+90 0" />
+
+        <TextView
+            android:id="@+id/state_descent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="спуск"
+            android:textAlignment="center"
+            android:textColor="@android:color/white"
+            android:textSize="14sp" />
 
     </LinearLayout>
 
