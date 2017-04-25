@@ -49,6 +49,8 @@
             android:id="@+id/error"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="Для работы приложения необходимы разрешения"
+            android:textColor="@android:color/white"
             android:visibility="gone" />
 
         <TextView

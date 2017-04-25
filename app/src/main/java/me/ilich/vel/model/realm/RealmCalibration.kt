@@ -1,4 +1,4 @@
-package me.ilich.vel.model
+package me.ilich.vel.model.realm
 
 import io.realm.RealmObject
 import me.ilich.vel.PitchDegree

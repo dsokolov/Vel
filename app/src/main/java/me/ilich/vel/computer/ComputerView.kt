@@ -8,18 +8,10 @@ import android.view.WindowManager
 import android.widget.TextView
 import com.jakewharton.rxbinding.view.longClicks
 import me.ilich.vel.R
-import me.ilich.vel.Speed
-import me.ilich.vel.sources.AccelerationData
-import me.ilich.vel.sources.OrientationData
+import me.ilich.vel.model.sources.OrientationEntity
 import rx.Observable
-import java.text.SimpleDateFormat
-import java.util.*
 
-class ComputerView(val activity: Activity) {
-
-    companion object {
-        private val SDF = SimpleDateFormat("HH:mm", Locale.getDefault())
-    }
+class ComputerView(val activity: Activity) : ComputerContracts.View {
 
     private lateinit var timeTextView: TextView
     private lateinit var speedTextView: TextView
@@ -30,7 +22,7 @@ class ComputerView(val activity: Activity) {
     private lateinit var stateAscentTextView: TextView
     private lateinit var stateDescentTextView: TextView
 
-    fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?) {
         activity.requestWindowFeature(Window.FEATURE_NO_TITLE);
         activity.window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
         activity.window.addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
@@ -45,36 +37,35 @@ class ComputerView(val activity: Activity) {
         stateDescentTextView = activity.findViewById(R.id.state_descent) as TextView
     }
 
-    fun onDestroy() {
+    override fun onDestroy() {
         activity.window.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
     }
 
-    fun showTime(time: Date) {
-        val s = SDF.format(time)
-        timeTextView.text = s
+    override fun updateTime(time: String) {
+        timeTextView.text = time
     }
 
-    fun hideError() {
-        errorTextView.visibility = View.GONE
+    override fun updateAngel(angel: String) {
+        angelTextView.text = angel
     }
 
-    fun showError(s: String) {
-        errorTextView.visibility = View.VISIBLE
-        errorTextView.text = s
+    override fun updateSpeed(speed: String) {
+        speedTextView.text = speed
     }
 
-    fun showSpeed(speed: Speed) {
-        val speedKmph = speed / 0.36
-        speedTextView.text = String.format("%.2f", speedKmph)
-    }
-
-    fun showAngel(orientationData: OrientationData) {
-        if (-1 < orientationData.pitch && orientationData.pitch < 1) {
-            angelTextView.text = "0"
+    override fun updatePermissionsError(visible: Boolean) {
+        errorTextView.visibility = if (visible) {
+            View.VISIBLE
         } else {
-            val unsigned = Math.abs(orientationData.pitch)
-            angelTextView.text = String.format("%.0f", unsigned)
+            View.GONE
         }
+    }
+
+    override fun updateAcceleration(acceleration: String) {
+        accelerationTextView.text = acceleration
+    }
+
+    fun showAngel(orientationData: OrientationEntity) {
         if (orientationData.pitch > 1) {
             stateDescentTextView.visibility = View.VISIBLE
             stateAscentTextView.visibility = View.INVISIBLE
@@ -87,12 +78,7 @@ class ComputerView(val activity: Activity) {
         }
     }
 
-    fun calibrationObservable(): Observable<Unit> = angelTextView.longClicks()
+    override fun userCalibrate(): Observable<Unit> = angelTextView.longClicks()
 
-    fun showAcceleration(a: AccelerationData) {
-        //val ac = Math.sqrt((a.x * a.x + a.y * a.y + a.z * a.z).toDouble()).toFloat()
-        //accelerationTextView.text = String.format("%.2f", ac)
-        accelerationTextView.text = String.format("%.2f", a.y)
-    }
 
 }

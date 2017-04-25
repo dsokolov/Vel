@@ -1,4 +1,4 @@
-package me.ilich.vel
+package me.ilich.vel.model.realm
 
 import io.realm.Realm
 import io.realm.RealmModel

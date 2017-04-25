@@ -6,20 +6,16 @@ import android.support.v7.app.AppCompatActivity
 
 class ComputerActivity : AppCompatActivity() {
 
-    private val view = ComputerView(this)
-    private val model = ComputerModel(this)
-    private val presenter = ComputerPresenter(this, view, model)
+    private val presenter = ComputerPresenter(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        view.onCreate(savedInstanceState)
-        model.onCreate(savedInstanceState)
+        presenter.onCreate(savedInstanceState)
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        view.onDestroy()
-        model.onDestroy()
+        presenter.onDestroy()
     }
 
     override fun onStart() {

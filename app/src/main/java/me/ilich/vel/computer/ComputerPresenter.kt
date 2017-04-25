@@ -1,62 +1,94 @@
 package me.ilich.vel.computer
 
 import android.app.Activity
+import android.os.Bundle
 import rx.android.schedulers.AndroidSchedulers
+import rx.schedulers.Schedulers
 import rx.subscriptions.CompositeSubscription
+import java.text.SimpleDateFormat
+import java.util.*
 
-class ComputerPresenter(
-        val activity: Activity,
-        val view: ComputerView,
-        val model: ComputerModel
-) {
+class ComputerPresenter(activity: Activity) {
 
-    private val startStopSubscription = CompositeSubscription()
+    companion object {
+        private val SDF = SimpleDateFormat("HH:mm", Locale.getDefault())
+    }
+
+    private val view: ComputerContracts.View = ComputerView(activity)
+    private val interactor: ComputerContracts.Interactor = ComputerInteractor(activity)
+
+    private var startStopSubscription: CompositeSubscription? = null
+
+    fun onCreate(savedInstanceState: Bundle?) {
+        view.onCreate(savedInstanceState)
+        interactor.onCreate(savedInstanceState)
+    }
+
+    fun onDestroy() {
+        view.onDestroy()
+        interactor.onDestroy()
+    }
 
     fun onStart() {
-        startStopSubscription.addAll(
-                model.timeObservable().
+        startStopSubscription = CompositeSubscription(
+                interactor.time().
+                        map { SDF.format(it) }.
+                        subscribeOn(Schedulers.computation()).
                         observeOn(AndroidSchedulers.mainThread()).
-                        subscribe { view.showTime(it) },
+                        subscribe { view.updateTime(it) },
 
-                model.calibratedOrientationObservable().
+                interactor.calibratedOrientation().
+                        map {
+                            if (-1 < it.pitch && it.pitch < 1) {
+                                "0"
+                            } else {
+                                val unsigned = Math.abs(it.pitch)
+                                String.format("%.0f", unsigned)
+                            }
+                        }.
+                        subscribeOn(Schedulers.computation()).
                         observeOn(AndroidSchedulers.mainThread()).
-                        subscribe { view.showAngel(it) },
+                        subscribe { view.updateAngel(it) },
 
-                model.permissionsObservable().
+                interactor.permissions().
                         observeOn(AndroidSchedulers.mainThread()).
                         subscribe {
+                            view.updatePermissionsError(!it)
                             if (it) {
-                                view.hideError()
                                 subscribeSpeed()
-                            } else {
-                                view.showError("GPS disabled")
                             }
                         },
 
-                view.calibrationObservable().
-                        flatMap {
-                            model.uncalibratedOrientationObservable().first()
-                        }.
-                        flatMap { orientation ->
-                            model.calibrate(orientation)
-                        }.
+                view.userCalibrate().
+                        flatMap { interactor.uncalibratedOrientation().first() }.
+                        flatMap { it -> interactor.calibrate(it) }.
                         subscribe(),
 
-                model.accelerationObservable().
+                interactor.acceleration().
+                        map { acceleration ->
+                            //val ac = Math.sqrt((a.x * a.x + a.y * a.y + a.z * a.z).toDouble()).toFloat()
+                            //accelerationTextView.text = String.format("%.2f", ac)
+                            String.format("%.2f", acceleration.y)
+                        }.
+                        subscribeOn(Schedulers.computation()).
                         observeOn(AndroidSchedulers.mainThread()).
-                        subscribe { view.showAcceleration(it) }
+                        subscribe { view.updateAcceleration(it) }
         )
     }
 
     fun onStop() {
-        startStopSubscription.unsubscribe()
+        startStopSubscription?.unsubscribe()
     }
 
     private fun subscribeSpeed() {
-        startStopSubscription.addAll(
-                model.locationObservable().
+        startStopSubscription?.addAll(
+                interactor.location().
+                        map { location ->
+                            val speedKmph = location.speed / 0.36
+                            String.format("%.2f", speedKmph)
+                        }.
                         observeOn(AndroidSchedulers.mainThread()).
-                        subscribe { view.showSpeed(it.speed) }
+                        subscribe { view.updateSpeed(it) }
         )
     }
 

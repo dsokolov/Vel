@@ -1,4 +1,4 @@
-package me.ilich.vel.sources
+package me.ilich.vel.model.sources
 
 import android.hardware.Sensor
 import android.hardware.SensorManager
@@ -6,23 +6,23 @@ import com.nvanbenschoten.rxsensor.RxSensorManager
 import me.ilich.vel.PitchDegree
 import me.ilich.vel.RollDegree
 import me.ilich.vel.YawDegree
-import me.ilich.vel.radToDeg
+import me.ilich.vel.model.radToDeg
 import rx.Observable
 import rx.schedulers.Schedulers
 import java.util.concurrent.TimeUnit
 
-data class OrientationData(
+data class OrientationEntity(
         val roll: RollDegree,
         val pitch: PitchDegree,
         val yaw: YawDegree
 )
 
-fun orientationObservable(rxSensorManager: RxSensorManager): Observable<OrientationData> {
+fun orientationObservable(rxSensorManager: RxSensorManager): Observable<OrientationEntity> {
     val uncalibratedObservable = rotationVectorOrientationObservable(rxSensorManager)
     return uncalibratedObservable
 }
 
-private fun rotationVectorOrientationObservable(rxSensorManager: RxSensorManager): Observable<OrientationData> =
+private fun rotationVectorOrientationObservable(rxSensorManager: RxSensorManager): Observable<OrientationEntity> =
         rxSensorManager.observeSensor(Sensor.TYPE_ROTATION_VECTOR, SensorManager.SENSOR_DELAY_NORMAL).
                 throttleFirst(200L, TimeUnit.MILLISECONDS).
                 subscribeOn(Schedulers.io()).
@@ -34,7 +34,7 @@ private fun rotationVectorOrientationObservable(rxSensorManager: RxSensorManager
                     SensorManager.getRotationMatrixFromVector(rotationMatrix, event.values)
                     SensorManager.remapCoordinateSystem(rotationMatrix, SensorManager.AXIS_X, SensorManager.AXIS_Y, adjustedRotationMatrix)
                     SensorManager.getOrientation(adjustedRotationMatrix, orientationVals)
-                    OrientationData(
+                    OrientationEntity(
                             yaw = orientationVals[0].radToDeg(),
                             pitch = orientationVals[1].radToDeg(),
                             roll = orientationVals[2].radToDeg()
