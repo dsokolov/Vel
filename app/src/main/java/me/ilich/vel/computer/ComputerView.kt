@@ -2,16 +2,21 @@ package me.ilich.vel.computer
 
 import android.app.Activity
 import android.os.Bundle
-import android.view.View
-import android.view.Window
-import android.view.WindowManager
+import android.support.design.widget.NavigationView
+import android.support.v4.widget.DrawerLayout
+import android.view.*
 import android.widget.TextView
+import com.jakewharton.rxbinding.view.clicks
 import com.jakewharton.rxbinding.view.longClicks
 import me.ilich.vel.R
-import me.ilich.vel.model.sources.OrientationEntity
 import rx.Observable
 
 class ComputerView(val activity: Activity) : ComputerContracts.View {
+
+    private lateinit var drawerLayout: DrawerLayout
+    private lateinit var navigationView: NavigationView
+    private lateinit var menuSettings: MenuItem
+    private lateinit var menuAbout: MenuItem
 
     private lateinit var timeTextView: TextView
     private lateinit var speedTextView: TextView
@@ -35,18 +40,46 @@ class ComputerView(val activity: Activity) : ComputerContracts.View {
 
         stateAscentTextView = activity.findViewById(R.id.state_ascent) as TextView
         stateDescentTextView = activity.findViewById(R.id.state_descent) as TextView
+
+        drawerLayout = activity.findViewById(R.id.drawer) as DrawerLayout
+        navigationView = activity.findViewById(R.id.navigation) as NavigationView
+        menuSettings = navigationView.menu.findItem(R.id.menu_settings)
+        menuAbout = navigationView.menu.findItem(R.id.menu_about)
     }
 
     override fun onDestroy() {
         activity.window.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
     }
 
+    override fun onBackPressed(): Boolean =
+            if (drawerLayout.isDrawerOpen(Gravity.START)) {
+                drawerLayout.closeDrawer(Gravity.START)
+                false
+            } else {
+                true
+            }
+
     override fun updateTime(time: String) {
         timeTextView.text = time
     }
 
-    override fun updateAngel(angel: String) {
+    override fun updateAngelValue(angel: String) {
         angelTextView.text = angel
+    }
+
+    override fun updateAngleStateAscend() {
+        stateAscentTextView.visibility = View.VISIBLE
+        stateDescentTextView.visibility = View.INVISIBLE
+    }
+
+    override fun updateAngleStateDescend() {
+        stateAscentTextView.visibility = View.INVISIBLE
+        stateDescentTextView.visibility = View.VISIBLE
+    }
+
+    override fun updateAngleStateFlat() {
+        stateAscentTextView.visibility = View.INVISIBLE
+        stateDescentTextView.visibility = View.INVISIBLE
     }
 
     override fun updateSpeed(speed: String) {
@@ -65,20 +98,10 @@ class ComputerView(val activity: Activity) : ComputerContracts.View {
         accelerationTextView.text = acceleration
     }
 
-    fun showAngel(orientationData: OrientationEntity) {
-        if (orientationData.pitch > 1) {
-            stateDescentTextView.visibility = View.VISIBLE
-            stateAscentTextView.visibility = View.INVISIBLE
-        } else if (orientationData.pitch < -1) {
-            stateDescentTextView.visibility = View.INVISIBLE
-            stateAscentTextView.visibility = View.VISIBLE
-        } else {
-            stateDescentTextView.visibility = View.INVISIBLE
-            stateAscentTextView.visibility = View.INVISIBLE
-        }
-    }
-
     override fun userCalibrate(): Observable<Unit> = angelTextView.longClicks()
 
+    override fun userToSettings(): Observable<Unit> = menuSettings.clicks()
+
+    override fun userToAbout(): Observable<Unit> = menuAbout.clicks()
 
 }

@@ -1,6 +1,5 @@
 package me.ilich.vel.computer
 
-import android.Manifest
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 
@@ -26,6 +25,13 @@ class ComputerActivity : AppCompatActivity() {
     override fun onStop() {
         super.onStop()
         presenter.onStop()
+    }
+
+    override fun onBackPressed() {
+        val b = presenter.onBackPressed()
+        if (b) {
+            super.onBackPressed()
+        }
     }
 
 }

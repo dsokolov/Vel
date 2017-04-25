@@ -16,6 +16,7 @@ class ComputerPresenter(activity: Activity) {
 
     private val view: ComputerContracts.View = ComputerView(activity)
     private val interactor: ComputerContracts.Interactor = ComputerInteractor(activity)
+    private val router: ComputerContracts.Router = ComputerRouter(activity)
 
     private var startStopSubscription: CompositeSubscription? = null
 
@@ -30,6 +31,8 @@ class ComputerPresenter(activity: Activity) {
     }
 
     fun onStart() {
+        val calibratedOrientation = interactor.calibratedOrientation()
+
         startStopSubscription = CompositeSubscription(
                 interactor.time().
                         map { SDF.format(it) }.
@@ -37,7 +40,7 @@ class ComputerPresenter(activity: Activity) {
                         observeOn(AndroidSchedulers.mainThread()).
                         subscribe { view.updateTime(it) },
 
-                interactor.calibratedOrientation().
+                calibratedOrientation.
                         map {
                             if (-1 < it.pitch && it.pitch < 1) {
                                 "0"
@@ -48,7 +51,19 @@ class ComputerPresenter(activity: Activity) {
                         }.
                         subscribeOn(Schedulers.computation()).
                         observeOn(AndroidSchedulers.mainThread()).
-                        subscribe { view.updateAngel(it) },
+                        subscribe { view.updateAngelValue(it) },
+
+                calibratedOrientation.observeOn(AndroidSchedulers.mainThread()).
+                        subscribe {
+                            if (it.pitch > 1) {
+                                view.updateAngleStateDescend()
+                            } else if (it.pitch < -1) {
+                                view.updateAngleStateAscend()
+                            } else {
+                                view.updateAngleStateFlat()
+                            }
+                        },
+
 
                 interactor.permissions().
                         observeOn(AndroidSchedulers.mainThread()).
@@ -72,7 +87,11 @@ class ComputerPresenter(activity: Activity) {
                         }.
                         subscribeOn(Schedulers.computation()).
                         observeOn(AndroidSchedulers.mainThread()).
-                        subscribe { view.updateAcceleration(it) }
+                        subscribe { view.updateAcceleration(it) },
+
+                view.userToSettings().subscribe { router.settings() },
+                view.userToAbout().subscribe { router.about() }
+
         )
     }
 
@@ -91,5 +110,7 @@ class ComputerPresenter(activity: Activity) {
                         subscribe { view.updateSpeed(it) }
         )
     }
+
+    fun onBackPressed(): Boolean = view.onBackPressed()
 
 }
