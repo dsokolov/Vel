@@ -8,7 +8,11 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="MainActivty" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="MainActivity" parent="Theme.AppCompat.Light.NoActionBar">
+
+    </style>
+
+    <style name="NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
 
     </style>
 

@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Vel</string>
+    <string name="speed_unit_kilometers_per_hour">km/h</string>
+    <string name="speed_unit_meters_per_second">m/s</string>
+    <string name="speed_unit_miles_per_hour">mph</string>
+    <string name="pitch_unit_degree">°</string>
+    <string name="pitch_unit_percent">%</string>
 </resources>

@@ -51,13 +51,13 @@ class ComputerView(val activity: Activity) : ComputerContracts.View {
         activity.window.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
     }
 
-    override fun onBackPressed(): Boolean =
-            if (drawerLayout.isDrawerOpen(Gravity.START)) {
-                drawerLayout.closeDrawer(Gravity.START)
-                false
-            } else {
-                true
-            }
+    override fun onBackPressed(onFinish: () -> Unit) {
+        if (drawerLayout.isDrawerOpen(Gravity.START)) {
+            drawerLayout.closeDrawer(Gravity.START)
+        } else {
+            onFinish()
+        }
+    }
 
     override fun updateTime(time: String) {
         timeTextView.text = time

@@ -1,18 +1,15 @@
 package me.ilich.vel.computer
 
-import android.os.Bundle
 import me.ilich.vel.model.sources.AccelerationEntity
 import me.ilich.vel.model.sources.LocationEntity
 import me.ilich.vel.model.sources.OrientationEntity
+import me.ilich.vel.viper.Contracts
 import rx.Observable
 import java.util.*
 
-interface ComputerContracts {
+object ComputerContracts {
 
-    interface View {
-        fun onCreate(savedInstanceState: Bundle?)
-        fun onDestroy()
-        fun onBackPressed(): Boolean
+    interface View : Contracts.View {
         fun updatePermissionsError(visible: Boolean)
         fun updateTime(time: String)
         fun updateAngelValue(angel: String)
@@ -26,9 +23,7 @@ interface ComputerContracts {
         fun userToAbout(): Observable<Unit>
     }
 
-    interface Interactor {
-        fun onCreate(savedInstanceState: Bundle?)
-        fun onDestroy()
+    interface Interactor : Contracts.Interactor {
         fun permissions(): Observable<Boolean>
         fun time(): Observable<Date>
         fun calibratedOrientation(): Observable<OrientationEntity>
@@ -38,7 +33,10 @@ interface ComputerContracts {
         fun calibrate(orientation: OrientationEntity): Observable<Unit>
     }
 
-    interface Router {
+    interface Presenter : Contracts.Presenter {
+    }
+
+    interface Router: Contracts.Router {
         fun settings()
         fun about()
     }

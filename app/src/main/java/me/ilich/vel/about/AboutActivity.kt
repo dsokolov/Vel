@@ -1,8 +1,10 @@
 package me.ilich.vel.about
 
-import android.app.Activity
+import me.ilich.vel.viper.BaseActivity
 
-class AboutActivity : Activity() {
+class AboutActivity : BaseActivity() {
+
+    override val presenter = AboutPresenter(this)
 
 }
 

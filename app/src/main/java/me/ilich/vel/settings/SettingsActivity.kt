@@ -1,7 +1,9 @@
 package me.ilich.vel.settings
 
-import android.app.Activity
+import me.ilich.vel.viper.BaseActivity
 
-class SettingsActivity : Activity() {
+class SettingsActivity : BaseActivity() {
+
+    override val presenter = SettingsPresenter(this)
 
 }

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Вел</string>
+    <string name="speed_unit_kilometers_per_hour">км/ч</string>
+    <string name="speed_unit_meters_per_second">м/c</string>
+    <string name="speed_unit_miles_per_hour">миля/ч</string>
+</resources>
