@@ -5,9 +5,12 @@ import android.app.Activity
 import android.content.Context
 import android.hardware.SensorManager
 import android.os.Bundle
+import android.preference.PreferenceManager
+import com.f2prateek.rx.preferences.RxSharedPreferences
 import com.nvanbenschoten.rxsensor.RxSensorManager
 import com.tbruyelle.rxpermissions.RxPermissions
 import io.realm.Realm
+import me.ilich.vel.R
 import me.ilich.vel.model.realm.RealmCalibration
 import me.ilich.vel.model.realm.firstOrCreate
 import me.ilich.vel.model.realm.transactionObservable
@@ -31,12 +34,14 @@ class ComputerInteractor(val activity: Activity) : ComputerContracts.Interactor 
     private lateinit var rxPermissions: RxPermissions
     private lateinit var rxSensor: RxSensorManager
     private lateinit var realm: Realm
+    private lateinit var preferences: RxSharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         rxPermissions = RxPermissions(activity)
         realm = Realm.getDefaultInstance()
         val sensorManager = activity.getSystemService(Context.SENSOR_SERVICE) as SensorManager
         rxSensor = RxSensorManager(sensorManager)
+        preferences = RxSharedPreferences.create(PreferenceManager.getDefaultSharedPreferences(activity))
     }
 
     override fun onDestroy() {
@@ -90,4 +95,25 @@ class ComputerInteractor(val activity: Activity) : ComputerContracts.Interactor 
     override fun acceleration(): Observable<AccelerationEntity> =
             accelerationObservable(rxSensor)
 
+    override fun speedUnitObservable(): Observable<String> {
+        val key = activity.getString(R.string.preference_key_speed_unit)
+        val default = activity.getString(R.string.preference_speed_default)
+        return preferences.getString(key, default).asObservable()
+    }
+
+    override fun pitchUnitObservable(): Observable<PitchUnitEntity> {
+        val key = activity.getString(R.string.preference_pitch_key)
+        val default = activity.getString(R.string.preference_pitch_default)
+        val degree = activity.getString(R.string.preference_pitch_value_degree)
+        val percent = activity.getString(R.string.preference_pitch_value_percent)
+        return preferences.getString(key, default).
+                asObservable().
+                flatMap {
+                    when (it) {
+                        degree -> Observable.just(PitchUnitEntity.Degree(activity))
+                        percent -> Observable.just(PitchUnitEntity.Percent(activity))
+                        else -> Observable.error(RuntimeException("unknown unit $it"))
+                    }
+                }
+    }
 }

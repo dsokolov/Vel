@@ -6,58 +6,63 @@
     android:orientation="vertical"
     tools:context=".settings.SettingsActivity">
 
-    <TextView
+    <FrameLayout
+        android:id="@+id/content"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Speed unit"
-        android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
+        android:layout_height="wrap_content" />
 
-    <RadioGroup
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <RadioButton
-            android:id="@+id/speed_unit_kilometers_per_hour"
+    <!--    <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/speed_unit_kilometers_per_hour" />
+            android:text="Speed unit"
+            android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
 
-        <RadioButton
-            android:id="@+id/speed_unit_meters_per_second"
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RadioButton
+                android:id="@+id/speed_unit_kilometers_per_hour"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/speed_unit_kilometers_per_hour" />
+
+            <RadioButton
+                android:id="@+id/speed_unit_meters_per_second"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/speed_unit_meters_per_second" />
+
+            <RadioButton
+                android:id="@+id/speed_unit_miles_per_hour"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/speed_unit_miles_per_hour" />
+
+        </RadioGroup>
+
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/speed_unit_meters_per_second" />
+            android:text="Pitch unit"
+            android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
 
-        <RadioButton
-            android:id="@+id/speed_unit_miles_per_hour"
+        <RadioGroup
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/speed_unit_miles_per_hour" />
+            android:layout_height="wrap_content">
 
-    </RadioGroup>
+            <RadioButton
+                android:id="@+id/pitch_unit_degree"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/pitch_unit_degree" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Pitch unit"
-        android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
+            <RadioButton
+                android:id="@+id/pitch_unit_percent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/pitch_unit_percent" />
 
-    <RadioGroup
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <RadioButton
-            android:id="@+id/pitch_unit_degree"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/pitch_unit_degree" />
-
-        <RadioButton
-            android:id="@+id/pitch_unit_percent"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/pitch_unit_percent" />
-
-    </RadioGroup>
+        </RadioGroup>-->
 
 </LinearLayout>

@@ -3,3 +3,5 @@ Vel.iml
 local.properties
 .idea/
 build/
+Будет удалено libs/
+Будет удалено src/main/res/drawable/

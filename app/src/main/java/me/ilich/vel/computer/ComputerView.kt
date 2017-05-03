@@ -20,8 +20,10 @@ class ComputerView(val activity: Activity) : ComputerContracts.View {
 
     private lateinit var timeTextView: TextView
     private lateinit var speedTextView: TextView
+    private lateinit var speedUnitTextView: TextView
     private lateinit var errorTextView: TextView
     private lateinit var angelTextView: TextView
+    private lateinit var angelUnitTextView: TextView
     private lateinit var accelerationTextView: TextView
 
     private lateinit var stateAscentTextView: TextView
@@ -33,9 +35,11 @@ class ComputerView(val activity: Activity) : ComputerContracts.View {
         activity.window.addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
         activity.setContentView(R.layout.activity_main)
         timeTextView = activity.findViewById(R.id.time) as TextView
-        speedTextView = activity.findViewById(R.id.speed) as TextView
+        speedTextView = activity.findViewById(R.id.speed_unit) as TextView
+        speedUnitTextView = activity.findViewById(R.id.speed_unit) as TextView
         errorTextView = activity.findViewById(R.id.error) as TextView
         angelTextView = activity.findViewById(R.id.angel) as TextView
+        angelUnitTextView = activity.findViewById(R.id.angel_unit) as TextView
         accelerationTextView = activity.findViewById(R.id.acceleration) as TextView
 
         stateAscentTextView = activity.findViewById(R.id.state_ascent) as TextView
@@ -67,6 +71,10 @@ class ComputerView(val activity: Activity) : ComputerContracts.View {
         angelTextView.text = angel
     }
 
+    override fun updateAngelUnit(unit: String) {
+        angelUnitTextView.text = unit
+    }
+
     override fun updateAngleStateAscend() {
         stateAscentTextView.visibility = View.VISIBLE
         stateDescentTextView.visibility = View.INVISIBLE
@@ -84,6 +92,10 @@ class ComputerView(val activity: Activity) : ComputerContracts.View {
 
     override fun updateSpeed(speed: String) {
         speedTextView.text = speed
+    }
+
+    override fun updateSpeedUnit(speedUnit: String) {
+        speedUnitTextView.text = speedUnit
     }
 
     override fun updatePermissionsError(visible: Boolean) {

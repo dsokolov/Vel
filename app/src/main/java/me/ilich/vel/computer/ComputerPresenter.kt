@@ -28,8 +28,7 @@ class ComputerPresenter(activity: Activity) : BasePresenter(activity) {
         return arrayOf(
                 subscribePermissions(),
                 subscribeTime(),
-                subscribeAngelValue(calibratedOrientation),
-                subscribeAngelState(calibratedOrientation),
+                subscribePitch(calibratedOrientation),
                 subscribeAcceleration(),
 
                 view.userCalibrate().
@@ -66,32 +65,38 @@ class ComputerPresenter(activity: Activity) : BasePresenter(activity) {
                 }
     }
 
-    private fun subscribeAngelState(calibratedOrientation: Observable<OrientationEntity>): Subscription {
-        return calibratedOrientation.observeOn(AndroidSchedulers.mainThread()).
-                subscribe {
-                    if (it.pitch > 1) {
-                        view.updateAngleStateDescend()
-                    } else if (it.pitch < -1) {
-                        view.updateAngleStateAscend()
-                    } else {
-                        view.updateAngleStateFlat()
-                    }
+    private fun subscribePitch(calibratedOrientation: Observable<OrientationEntity>) =
+            Observable.combineLatest(
+                    interactor.pitchUnitObservable(),
+                    calibratedOrientation
+            ) { unit, orientation ->
+                val angel = unit.value(orientation.pitch)
+                val pitch = if (-1 < angel && angel < 1) {
+                    "0"
+                } else {
+                    val unsigned = Math.abs(angel)
+                    String.format("%.0f", unsigned)
                 }
-    }
-
-    private fun subscribeAngelValue(calibratedOrientation: Observable<OrientationEntity>): Subscription =
-            calibratedOrientation.
-                    map {
-                        if (-1 < it.pitch && it.pitch < 1) {
-                            "0"
-                        } else {
-                            val unsigned = Math.abs(it.pitch)
-                            String.format("%.0f", unsigned)
-                        }
-                    }.
+                val state = if (orientation.pitch > 1) {
+                    AngelEntity.State.DESCEND
+                } else if (orientation.pitch < -1) {
+                    AngelEntity.State.ASCEND
+                } else {
+                    AngelEntity.State.FLAT
+                }
+                AngelEntity(pitch, unit, state)
+            }.
                     subscribeOn(Schedulers.computation()).
                     observeOn(AndroidSchedulers.mainThread()).
-                    subscribe { view.updateAngelValue(it) }
+                    subscribe {
+                        when (it.state) {
+                            AngelEntity.State.ASCEND -> view.updateAngleStateAscend()
+                            AngelEntity.State.DESCEND -> view.updateAngleStateDescend()
+                            AngelEntity.State.FLAT -> view.updateAngleStateFlat()
+                        }
+                        view.updateAngelValue(it.angel)
+                        view.updateAngelUnit(it.unit.title)
+                    }
 
     private fun subscribeTime(): Subscription =
             interactor.time().

@@ -127,21 +127,20 @@
     <orderEntry type="library" exported="" scope="TEST" name="espresso-idling-resource-2.2.2" level="project" />
     <orderEntry type="library" exported="" name="constraint-layout-1.0.2" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="hamcrest-library-1.3" level="project" />
-    <orderEntry type="library" exported="" name="play-services-base-10.2.1" level="project" />
-    <orderEntry type="library" exported="" name="play-services-tasks-10.2.1" level="project" />
     <orderEntry type="library" exported="" name="relinker-1.2.2" level="project" />
+    <orderEntry type="library" exported="" name="play-services-base-10.2.4" level="project" />
+    <orderEntry type="library" exported="" name="kotlin-stdlib-jre7-1.1.2-2" level="project" />
     <orderEntry type="library" exported="" name="transition-25.3.1" level="project" />
+    <orderEntry type="library" exported="" name="play-services-tasks-10.2.4" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="hamcrest-integration-1.3" level="project" />
     <orderEntry type="library" exported="" name="design-25.3.1" level="project" />
     <orderEntry type="library" exported="" name="support-core-ui-25.3.1" level="project" />
     <orderEntry type="library" exported="" name="rxsensor-1.1.1" level="project" />
-    <orderEntry type="library" exported="" name="play-services-location-10.2.1" level="project" />
+    <orderEntry type="library" exported="" name="play-services-location-10.2.4" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="jsr305-2.0.1" level="project" />
     <orderEntry type="library" exported="" name="support-core-utils-25.3.1" level="project" />
     <orderEntry type="library" exported="" name="support-fragment-25.3.1" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="espresso-core-2.2.2" level="project" />
-    <orderEntry type="library" exported="" name="kotlin-stdlib-jre7-1.1.2" level="project" />
-    <orderEntry type="library" exported="" name="kotlin-stdlib-1.1.2" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="exposed-instrumentation-api-publish-0.5" level="project" />
     <orderEntry type="library" exported="" name="rxjava-1.2.9" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="rules-0.5" level="project" />
@@ -154,16 +153,18 @@
     <orderEntry type="library" exported="" name="annotations-13.0" level="project" />
     <orderEntry type="library" exported="" name="android-reactive-location-0.10" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="javax.inject-1" level="project" />
+    <orderEntry type="library" exported="" name="play-services-basement-10.2.4" level="project" />
     <orderEntry type="library" exported="" name="rxandroid-1.2.1" level="project" />
-    <orderEntry type="library" exported="" name="play-services-basement-10.2.1" level="project" />
     <orderEntry type="library" exported="" name="reactivesensors-0.1.2" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="javawriter-2.1.1" level="project" />
     <orderEntry type="library" exported="" name="support-v4-25.3.1" level="project" />
     <orderEntry type="library" exported="" name="support-media-compat-25.3.1" level="project" />
     <orderEntry type="library" exported="" name="rxbinding-0.4.0" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="hamcrest-core-1.3" level="project" />
+    <orderEntry type="library" exported="" name="rx-preferences-1.0.2" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="junit-4.12" level="project" />
     <orderEntry type="library" exported="" name="recyclerview-v7-25.3.1" level="project" />
+    <orderEntry type="library" exported="" name="kotlin-stdlib-1.1.2-2" level="project" />
     <orderEntry type="library" exported="" name="support-annotations-25.3.1" level="project" />
     <orderEntry type="library" exported="" name="realm-android-library-3.1.0" level="project" />
     <orderEntry type="library" exported="" name="appcompat-v7-25.3.1" level="project" />

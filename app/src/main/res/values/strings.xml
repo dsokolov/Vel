@@ -3,6 +3,40 @@
     <string name="speed_unit_kilometers_per_hour">km/h</string>
     <string name="speed_unit_meters_per_second">m/s</string>
     <string name="speed_unit_miles_per_hour">mph</string>
+    <string-array name="speed_units">
+        <item>@string/speed_unit_kilometers_per_hour</item>
+        <item>@string/speed_unit_meters_per_second</item>
+        <item>@string/speed_unit_miles_per_hour</item>
+    </string-array>
+    <string name="speed_unit_kilometers_per_hour_id" translatable="false">kmph</string>
+    <string name="speed_unit_meters_per_second_id" translatable="false">mps</string>
+    <string name="speed_unit_miles_per_hour_id" translatable="false">milesph</string>
+    <string-array name="speed_units_ids">
+        <item>@string/speed_unit_kilometers_per_hour_id</item>
+        <item>@string/speed_unit_meters_per_second_id</item>
+        <item>@string/speed_unit_miles_per_hour_id</item>
+    </string-array>
     <string name="pitch_unit_degree">°</string>
     <string name="pitch_unit_percent">%</string>
+
+    <string name="speed_unit_title">Speed unit</string>
+
+    <string name="preference_key_speed_unit" translatable="false">speed_unit</string>
+    <string name="preference_speed_default" translatable="false">@string/speed_unit_kilometers_per_hour_id</string>
+
+    <string name="preference_pitch_key" translatable="false">pitch_unit</string>
+    <string name="preference_pitch_value_degree" translatable="false">degree</string>
+    <string name="preference_pitch_value_percent" translatable="false">percent</string>
+    <string name="preference_pitch_default" translatable="false">@string/preference_pitch_value_degree</string>
+    <string-array name="preference_pitch_entities">
+        <item>@string/pitch_unit_degree</item>
+        <item>@string/pitch_unit_percent</item>
+    </string-array>
+    <string-array name="preference_pitch_values">
+        <item>@string/preference_pitch_value_degree</item>
+        <item>@string/preference_pitch_value_percent</item>
+    </string-array>
+    <string name="preference_pitch_summary">%s</string>
+    <string name="preference_pitch_title">Pitch</string>
+
 </resources>

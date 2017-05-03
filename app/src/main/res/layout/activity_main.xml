@@ -36,12 +36,21 @@
                 tools:text="12:34" />
 
             <TextView
-                android:id="@+id/speed"
+                android:id="@+id/speed_value"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAlignment="center"
                 android:textColor="@android:color/white"
                 android:textSize="142sp"
+                tools:text="123" />
+
+            <TextView
+                android:id="@+id/speed_unit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:textColor="@android:color/white"
+                android:textSize="42sp"
                 tools:text="123" />
 
             <TextView
@@ -79,6 +88,15 @@
                 android:textColor="@android:color/white"
                 android:textSize="42sp"
                 tools:text="+90 0" />
+
+            <TextView
+                android:id="@+id/angel_unit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:textColor="@android:color/white"
+                android:textSize="42sp"
+                tools:text="%" />
 
             <TextView
                 android:id="@+id/state_descent"
