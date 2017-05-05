@@ -13,12 +13,12 @@ object ComputerContracts {
         fun updatePermissionsError(visible: Boolean)
         fun updateTime(time: String)
         fun updateAngelValue(angel: String)
-        fun updateAngelUnit(unit: String)
+        fun updateAngelUnit(unitResIt: Int)
         fun updateAngleStateAscend()
         fun updateAngleStateDescend()
         fun updateAngleStateFlat()
         fun updateSpeed(speed: String)
-        fun updateSpeedUnit(speedUnit: String)
+        fun updateSpeedUnit(unitResIt: Int)
         fun updateAcceleration(acceleration: String)
         fun userCalibrate(): Observable<Unit>
         fun userToSettings(): Observable<Unit>
@@ -30,7 +30,7 @@ object ComputerContracts {
         fun time(): Observable<Date>
         fun calibratedOrientation(): Observable<OrientationEntity>
         fun uncalibratedOrientation(): Observable<OrientationEntity>
-        fun speedUnitObservable(): Observable<String>
+        fun speedUnitObservable(): Observable<SpeedUnitEntity>
         fun pitchUnitObservable(): Observable<PitchUnitEntity>
         fun location(): Observable<LocationEntity>
         fun acceleration(): Observable<AccelerationEntity>

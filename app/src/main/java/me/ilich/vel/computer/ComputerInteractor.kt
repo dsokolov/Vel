@@ -95,10 +95,23 @@ class ComputerInteractor(val activity: Activity) : ComputerContracts.Interactor 
     override fun acceleration(): Observable<AccelerationEntity> =
             accelerationObservable(rxSensor)
 
-    override fun speedUnitObservable(): Observable<String> {
-        val key = activity.getString(R.string.preference_key_speed_unit)
+    override fun speedUnitObservable(): Observable<SpeedUnitEntity> {
+        val key = activity.getString(R.string.preference_speed_key)
         val default = activity.getString(R.string.preference_speed_default)
-        return preferences.getString(key, default).asObservable()
+        val kmph = activity.getString(R.string.preference_speed_entry_kmph)
+        val mps = activity.getString(R.string.preference_speed_entry_mps)
+        val miph = activity.getString(R.string.preference_speed_entry_miph)
+        return preferences.getString(key, default)
+                .asObservable()
+                .flatMap {
+                    when (it) {
+                        kmph -> Observable.just(SpeedUnitEntity.KilometersPerHour())
+                        mps -> Observable.just(SpeedUnitEntity.MetersPerSecond())
+                        miph -> Observable.just(SpeedUnitEntity.MilesPerHour())
+                        else -> Observable.error(RuntimeException("unknown unit $it"))
+                    }
+                }
+                .subscribeOn(Schedulers.computation())
     }
 
     override fun pitchUnitObservable(): Observable<PitchUnitEntity> {
@@ -106,14 +119,15 @@ class ComputerInteractor(val activity: Activity) : ComputerContracts.Interactor 
         val default = activity.getString(R.string.preference_pitch_default)
         val degree = activity.getString(R.string.preference_pitch_value_degree)
         val percent = activity.getString(R.string.preference_pitch_value_percent)
-        return preferences.getString(key, default).
-                asObservable().
-                flatMap {
+        return preferences.getString(key, default)
+                .asObservable()
+                .flatMap {
                     when (it) {
-                        degree -> Observable.just(PitchUnitEntity.Degree(activity))
-                        percent -> Observable.just(PitchUnitEntity.Percent(activity))
+                        degree -> Observable.just(PitchUnitEntity.Degree())
+                        percent -> Observable.just(PitchUnitEntity.Percent())
                         else -> Observable.error(RuntimeException("unknown unit $it"))
                     }
                 }
+                .subscribeOn(Schedulers.computation())
     }
 }

@@ -2,19 +2,19 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <ListPreference
-        android:defaultValue="@string/speed_unit_kilometers_per_hour_id"
-        android:entries="@array/speed_units"
-        android:entryValues="@array/speed_units_ids"
-        android:key="@string/preference_key_speed_unit"
+        android:defaultValue="@string/preference_speed_default"
+        android:entries="@array/preference_speed_entries"
+        android:entryValues="@array/preference_speed_values"
+        android:key="@string/preference_speed_key"
         android:summary="%s"
-        android:title="@string/speed_unit_title" />
+        android:title="@string/preference_speed_title" />
 
     <ListPreference
-        android:title="@string/preference_pitch_title"
-        android:defaultValue="@string/preference_pitch_value_degree"
+        android:defaultValue="@string/preference_pitch_default"
         android:entries="@array/preference_pitch_entities"
         android:entryValues="@array/preference_pitch_values"
         android:key="@string/preference_pitch_key"
-        android:summary="@string/preference_pitch_summary" />
+        android:summary="@string/preference_pitch_summary"
+        android:title="@string/preference_pitch_title" />
 
 </PreferenceScreen>

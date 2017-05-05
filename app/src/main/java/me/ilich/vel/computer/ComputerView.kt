@@ -35,7 +35,7 @@ class ComputerView(val activity: Activity) : ComputerContracts.View {
         activity.window.addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
         activity.setContentView(R.layout.activity_main)
         timeTextView = activity.findViewById(R.id.time) as TextView
-        speedTextView = activity.findViewById(R.id.speed_unit) as TextView
+        speedTextView = activity.findViewById(R.id.speed_value) as TextView
         speedUnitTextView = activity.findViewById(R.id.speed_unit) as TextView
         errorTextView = activity.findViewById(R.id.error) as TextView
         angelTextView = activity.findViewById(R.id.angel) as TextView
@@ -71,8 +71,8 @@ class ComputerView(val activity: Activity) : ComputerContracts.View {
         angelTextView.text = angel
     }
 
-    override fun updateAngelUnit(unit: String) {
-        angelUnitTextView.text = unit
+    override fun updateAngelUnit(unitResIt: Int) {
+        angelUnitTextView.setText(unitResIt)
     }
 
     override fun updateAngleStateAscend() {
@@ -94,8 +94,8 @@ class ComputerView(val activity: Activity) : ComputerContracts.View {
         speedTextView.text = speed
     }
 
-    override fun updateSpeedUnit(speedUnit: String) {
-        speedUnitTextView.text = speedUnit
+    override fun updateSpeedUnit(unitResIt: Int) {
+        speedUnitTextView.setText(unitResIt)
     }
 
     override fun updatePermissionsError(visible: Boolean) {

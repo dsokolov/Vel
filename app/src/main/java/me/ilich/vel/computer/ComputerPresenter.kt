@@ -1,6 +1,7 @@
 package me.ilich.vel.computer
 
 import android.app.Activity
+import android.support.annotation.StringRes
 import me.ilich.vel.model.sources.OrientationEntity
 import me.ilich.vel.viper.BasePresenter
 import rx.Observable
@@ -95,7 +96,7 @@ class ComputerPresenter(activity: Activity) : BasePresenter(activity) {
                             AngelEntity.State.FLAT -> view.updateAngleStateFlat()
                         }
                         view.updateAngelValue(it.angel)
-                        view.updateAngelUnit(it.unit.title)
+                        view.updateAngelUnit(it.unit.titleResId)
                     }
 
     private fun subscribeTime(): Subscription =
@@ -107,14 +108,25 @@ class ComputerPresenter(activity: Activity) : BasePresenter(activity) {
 
     private fun subscribeSpeed() {
         startStopSubscription?.addAll(
-                interactor.location().
-                        map { location ->
-                            val speedKmph = location.speed / 0.36
-                            String.format("%.2f", speedKmph)
-                        }.
-                        observeOn(AndroidSchedulers.mainThread()).
-                        subscribe { view.updateSpeed(it) }
+                Observable.combineLatest(
+                        interactor.speedUnitObservable(),
+                        interactor.location().map { it.speed }
+                ) { unit, speed ->
+                    val speedValue = String.format("%.2f", unit.convert(speed))
+                    val speedUnit = unit.titleResId
+                    SpeedEntity(speedValue, speedUnit)
+                }
+                        .observeOn(Schedulers.computation())
+                        .subscribe {
+                            view.updateSpeed(it.speedValue)
+                            view.updateAngelUnit(it.speedUnit)
+                        }
         )
     }
+
+    private data class SpeedEntity(
+            val speedValue: String,
+            @StringRes val speedUnit: Int
+    )
 
 }

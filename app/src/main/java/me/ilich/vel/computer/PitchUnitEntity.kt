@@ -1,25 +1,24 @@
 package me.ilich.vel.computer
 
-import android.content.Context
 import me.ilich.vel.PitchDegree
 import me.ilich.vel.R
 
 sealed class PitchUnitEntity() {
 
-    abstract val title: String
+    abstract val titleResId: Int
     abstract fun value(v: PitchDegree): Float
 
-    class Degree(context: Context) : PitchUnitEntity() {
+    class Degree : PitchUnitEntity() {
 
-        override val title: String = context.getString(R.string.pitch_unit_degree)
+        override val titleResId = R.string.preference_pitch_entry_degree
 
         override fun value(v: PitchDegree) = v
 
     }
 
-    class Percent(context: Context) : PitchUnitEntity() {
+    class Percent : PitchUnitEntity() {
 
-        override val title: String = context.getString(R.string.pitch_unit_percent)
+        override val titleResId = R.string.preference_pitch_entry_percent
 
         override fun value(v: PitchDegree): Float {
             val alpha = Math.toRadians(v.toDouble())

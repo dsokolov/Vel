@@ -1,6 +1,7 @@
 package me.ilich.vel
 
-typealias Speed = Float
+typealias MpsSpeed = Float
+typealias KmphSpeed = Float
 typealias Latitude = Double
 typealias Longitude = Double
 typealias RollDegree = Float

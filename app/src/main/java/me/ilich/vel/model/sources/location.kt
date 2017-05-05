@@ -4,7 +4,7 @@ import android.content.Context
 import com.google.android.gms.location.LocationRequest
 import me.ilich.vel.Latitude
 import me.ilich.vel.Longitude
-import me.ilich.vel.Speed
+import me.ilich.vel.MpsSpeed
 import pl.charmas.android.reactivelocation.ReactiveLocationProvider
 import rx.Observable
 import rx.schedulers.Schedulers
@@ -12,7 +12,7 @@ import rx.schedulers.Schedulers
 data class LocationEntity(
         val latitude: Latitude,
         val longitude: Longitude,
-        val speed: Speed
+        val speed: MpsSpeed
 )
 
 fun gpsObservable(context: Context): Observable<LocationEntity> {
