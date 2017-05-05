@@ -15,7 +15,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".computer.ComputerActivity"
-            android:theme="@style/MainActivity">
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -24,12 +24,14 @@
         </activity>
 
         <activity
+            android:exported="true"
             android:name=".settings.SettingsActivity"
-            android:theme="@style/MainActivity" />
+            android:parentActivityName=".computer.ComputerActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
             android:name=".about.AboutActivity"
-            android:theme="@style/MainActivity" />
+            android:theme="@style/AppTheme.NoActionBar" />
 
     </application>
 

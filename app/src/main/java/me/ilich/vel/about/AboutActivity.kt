@@ -1,10 +1,14 @@
 package me.ilich.vel.about
 
-import me.ilich.vel.viper.BaseActivity
+import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
+import me.ilich.vel.R
 
-class AboutActivity : BaseActivity() {
+class AboutActivity : AppCompatActivity() {
 
-    override val presenter = AboutPresenter(this)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_about)
+    }
 
 }
-
