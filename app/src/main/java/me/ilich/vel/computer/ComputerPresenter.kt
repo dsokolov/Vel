@@ -8,7 +8,6 @@ import rx.Observable
 import rx.Subscription
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
-import rx.subscriptions.CompositeSubscription
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -21,8 +20,6 @@ class ComputerPresenter(activity: Activity) : BasePresenter(activity) {
     override val view: ComputerContracts.View = ComputerView(activity)
     override val interactor: ComputerContracts.Interactor = ComputerInteractor(activity)
     override val router: ComputerContracts.Router = ComputerRouter(activity)
-
-    private var startStopSubscription: CompositeSubscription? = null
 
     override fun startStopSubscriptions(): Array<Subscription> {
         val calibratedOrientation = interactor.calibratedOrientation()
@@ -52,7 +49,7 @@ class ComputerPresenter(activity: Activity) : BasePresenter(activity) {
                 }.
                 subscribeOn(Schedulers.computation()).
                 observeOn(AndroidSchedulers.mainThread()).
-                subscribe { view.updateAcceleration(it) }
+                subscribe { /*view.updateAcceleration(it)*/ }
     }
 
     private fun subscribePermissions(): Subscription {
@@ -107,19 +104,20 @@ class ComputerPresenter(activity: Activity) : BasePresenter(activity) {
                     subscribe { view.updateTime(it) }
 
     private fun subscribeSpeed() {
-        startStopSubscription?.addAll(
+        addStartStopSubscription(
                 Observable.combineLatest(
                         interactor.speedUnitObservable(),
                         interactor.location().map { it.speed }
                 ) { unit, speed ->
-                    val speedValue = String.format("%.2f", unit.convert(speed))
+                    val speedValue = String.format("%.0f", unit.convert(speed))
                     val speedUnit = unit.titleResId
                     SpeedEntity(speedValue, speedUnit)
                 }
-                        .observeOn(Schedulers.computation())
+                        .subscribeOn(Schedulers.computation())
+                        .observeOn(AndroidSchedulers.mainThread())
                         .subscribe {
                             view.updateSpeed(it.speedValue)
-                            view.updateAngelUnit(it.speedUnit)
+                            view.updateSpeedUnit(it.speedUnit)
                         }
         )
     }

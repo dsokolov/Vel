@@ -1,4 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <string name="app_name">Вел</string>
+    <string name="computer_angel_state_ascent">Подъём</string>
+    <string name="computer_angel_state_descend">Спуск</string>
+    <string name="computer_error_need_permissions">Для работы приложения необходимы разрешения</string>
+    <string name="computer_speed_kmph">км/ч</string>
+    <string name="computer_speed_miph">мили/ч</string>
+    <string name="computer_speed_mps">м/с</string>
+    <string name="preference_pitch_entry_degree">°</string>
+    <string name="preference_pitch_entry_percent">%</string>
+    <string name="preference_pitch_summary">%s</string>
+    <string name="preference_pitch_title">Уклон</string>
+    <string name="preference_speed_entry_kmph">км/ч</string>
+    <string name="preference_speed_entry_miph">миля/ч</string>
+    <string name="preference_speed_entry_mps">м/с</string>
+    <string name="preference_speed_summary">%s</string>
+    <string name="preference_speed_title">Скорость</string>
 </resources>

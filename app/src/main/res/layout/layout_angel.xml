@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="140dp"
+    tools:showIn="@layout/activity_main">
+
+    <TextView
+        android:id="@+id/angel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:textSize="42sp"
+        tools:text="90" />
+
+    <TextView
+        android:id="@+id/angel_unit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/angel"
+        android:layout_toEndOf="@id/angel"
+        android:layout_toRightOf="@id/angel"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        tools:text="%" />
+
+    <TextView
+        android:id="@+id/state_ascent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/angel"
+        android:layout_centerHorizontal="true"
+        android:text="@string/computer_angel_state_ascent"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/state_descent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/angel"
+        android:layout_centerHorizontal="true"
+        android:text="@string/computer_angel_state_descend"
+        android:textSize="14sp" />
+
+</RelativeLayout>

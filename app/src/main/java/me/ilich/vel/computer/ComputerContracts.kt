@@ -19,7 +19,6 @@ object ComputerContracts {
         fun updateAngleStateFlat()
         fun updateSpeed(speed: String)
         fun updateSpeedUnit(unitResIt: Int)
-        fun updateAcceleration(acceleration: String)
         fun userCalibrate(): Observable<Unit>
         fun userToSettings(): Observable<Unit>
         fun userToAbout(): Observable<Unit>

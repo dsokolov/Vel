@@ -22,7 +22,7 @@ sealed class PitchUnitEntity() {
 
         override fun value(v: PitchDegree): Float {
             val alpha = Math.toRadians(v.toDouble())
-            return Math.sin(alpha).toFloat() * 100f
+            return Math.tan(alpha).toFloat() * 100f
         }
 
     }

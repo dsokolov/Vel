@@ -32,6 +32,10 @@ abstract class BasePresenter(activity: Activity) : Contracts.Presenter {
         startStopSubscription?.unsubscribe()
     }
 
+    fun addStartStopSubscription(subscription: Subscription) {
+        startStopSubscription?.add(subscription)
+    }
+
     override fun onBackPressed(onFinish: () -> Unit) = view.onBackPressed(onFinish)
 
     protected abstract fun startStopSubscriptions(): Array<Subscription>

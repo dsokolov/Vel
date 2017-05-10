@@ -10,7 +10,7 @@ sealed class SpeedUnitEntity {
 
     class MetersPerSecond : SpeedUnitEntity() {
 
-        override val titleResId = R.string.computer_speed_kmph
+        override val titleResId = R.string.computer_speed_mps
         override fun convert(speed: MpsSpeed): Float = speed
 
     }
@@ -21,7 +21,7 @@ sealed class SpeedUnitEntity {
             private val MPS_TO_KMPH = 3.6f
         }
 
-        override val titleResId = R.string.computer_speed_mps
+        override val titleResId = R.string.computer_speed_kmph
         override fun convert(speed: MpsSpeed): Float = speed * MPS_TO_KMPH
 
     }

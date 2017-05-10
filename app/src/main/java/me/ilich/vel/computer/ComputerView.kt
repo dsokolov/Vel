@@ -24,7 +24,6 @@ class ComputerView(val activity: Activity) : ComputerContracts.View {
     private lateinit var errorTextView: TextView
     private lateinit var angelTextView: TextView
     private lateinit var angelUnitTextView: TextView
-    private lateinit var accelerationTextView: TextView
 
     private lateinit var stateAscentTextView: TextView
     private lateinit var stateDescentTextView: TextView
@@ -40,7 +39,6 @@ class ComputerView(val activity: Activity) : ComputerContracts.View {
         errorTextView = activity.findViewById(R.id.error) as TextView
         angelTextView = activity.findViewById(R.id.angel) as TextView
         angelUnitTextView = activity.findViewById(R.id.angel_unit) as TextView
-        accelerationTextView = activity.findViewById(R.id.acceleration) as TextView
 
         stateAscentTextView = activity.findViewById(R.id.state_ascent) as TextView
         stateDescentTextView = activity.findViewById(R.id.state_descent) as TextView
@@ -104,10 +102,6 @@ class ComputerView(val activity: Activity) : ComputerContracts.View {
         } else {
             View.GONE
         }
-    }
-
-    override fun updateAcceleration(acceleration: String) {
-        accelerationTextView.text = acceleration
     }
 
     override fun userCalibrate(): Observable<Unit> = angelTextView.longClicks()

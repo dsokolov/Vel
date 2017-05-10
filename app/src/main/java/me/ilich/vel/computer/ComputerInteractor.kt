@@ -98,9 +98,9 @@ class ComputerInteractor(val activity: Activity) : ComputerContracts.Interactor 
     override fun speedUnitObservable(): Observable<SpeedUnitEntity> {
         val key = activity.getString(R.string.preference_speed_key)
         val default = activity.getString(R.string.preference_speed_default)
-        val kmph = activity.getString(R.string.preference_speed_entry_kmph)
-        val mps = activity.getString(R.string.preference_speed_entry_mps)
-        val miph = activity.getString(R.string.preference_speed_entry_miph)
+        val kmph = activity.getString(R.string.preference_speed_value_kmph)
+        val mps = activity.getString(R.string.preference_speed_value_mps)
+        val miph = activity.getString(R.string.preference_speed_value_miph)
         return preferences.getString(key, default)
                 .asObservable()
                 .flatMap {
