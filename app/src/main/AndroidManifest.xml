@@ -14,7 +14,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true">
 
-        <activity android:name=".computer.ComputerActivity">
+        <activity android:name=".computer.ComputerActivity"
+            android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -25,7 +26,11 @@
         <activity
             android:name=".settings.SettingsActivity"
             android:label="@string/activity_settings"
-            android:parentActivityName=".computer.ComputerActivity" />
+            android:parentActivityName=".computer.ComputerActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".computer.ComputerActivity" />
+        </activity>
 
         <activity
             android:name=".about.AboutActivity"

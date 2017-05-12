@@ -15,6 +15,9 @@ import rx.Observable
 
 class ComputerView(val activity: Activity) : ComputerContracts.View {
 
+
+    private var created = false
+
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var navigationView: NavigationView
     private lateinit var menuSettings: MenuItem
@@ -36,6 +39,7 @@ class ComputerView(val activity: Activity) : ComputerContracts.View {
         activity.window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
         activity.window.addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
         activity.setContentView(R.layout.activity_main)
+        created = true
         timeTextView = activity.findViewById(R.id.time) as TextView
         speedTextView = activity.findViewById(R.id.speed_value) as TextView
         speedUnitTextView = activity.findViewById(R.id.speed_unit) as TextView
@@ -67,7 +71,12 @@ class ComputerView(val activity: Activity) : ComputerContracts.View {
     }
 
     override fun updateTheme(it: Theme) {
-        activity.setTheme(it.themeResId)
+        if (created) {
+            activity.finish()
+            activity.startActivity(activity.intent)
+        } else {
+            activity.setTheme(it.themeResId)
+        }
     }
 
     override fun updateTime(time: String) {
