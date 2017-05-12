@@ -11,6 +11,7 @@ import com.nvanbenschoten.rxsensor.RxSensorManager
 import com.tbruyelle.rxpermissions.RxPermissions
 import io.realm.Realm
 import me.ilich.vel.R
+import me.ilich.vel.model.Theme
 import me.ilich.vel.model.realm.RealmCalibration
 import me.ilich.vel.model.realm.firstOrCreate
 import me.ilich.vel.model.realm.transactionObservable
@@ -26,7 +27,8 @@ class ComputerInteractor(val activity: Activity) : ComputerContracts.Interactor 
     companion object {
 
         private val PERMISSIONS = arrayOf(
-                Manifest.permission.ACCESS_FINE_LOCATION
+                Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE
         )
 
     }
@@ -84,7 +86,7 @@ class ComputerInteractor(val activity: Activity) : ComputerContracts.Interactor 
             orientationObservable(rxSensor)
 
     override fun location(): Observable<LocationEntity> =
-            gpsObservable(activity)
+            locationObservable(activity)
 
     override fun calibrate(orientation: OrientationEntity): Observable<Unit> =
             realm.transactionObservable { realm ->
@@ -130,4 +132,7 @@ class ComputerInteractor(val activity: Activity) : ComputerContracts.Interactor 
                 }
                 .subscribeOn(Schedulers.computation())
     }
+
+    override fun themeObservable(): Observable<Theme> = themeObservable(activity)
+
 }

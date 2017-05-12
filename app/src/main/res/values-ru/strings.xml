@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Вел</string>
+    <string name="app_name">ВЕЛ</string>
     <string name="computer_angel_state_ascent">Подъём</string>
     <string name="computer_angel_state_descend">Спуск</string>
     <string name="computer_error_need_permissions">Для работы приложения необходимы разрешения</string>
@@ -17,4 +17,6 @@
     <string name="preference_speed_entry_mps">м/с</string>
     <string name="preference_speed_summary">%s</string>
     <string name="preference_speed_title">Скорость</string>
+    <string name="theme_eggplant_title">Баклажан</string>
+    <string name="theme_forest_title">Лес</string>
 </resources>

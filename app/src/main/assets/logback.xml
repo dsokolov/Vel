@@ -1,0 +1,25 @@
+<configuration>
+
+    <appender name="vel_logcat" class="ch.qos.logback.classic.android.LogcatAppender">
+        <encoder>
+            <pattern>[%thread] %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="vel_file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log_path:-}/skyguru.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${log_path:-}/vel.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>50</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{yyyy.MM.dd HH:mm:ss.SSS} [%thread|%level|%logger] %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <root level="DEBUG">
+        <appender-ref ref="vel_file" />
+        <appender-ref ref="vel_logcat" />
+    </root>
+
+</configuration>

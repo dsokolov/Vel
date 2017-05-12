@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="theme_sea_id" translatable="false">SEA</string>
+
+    <string name="theme_sea_title">Sea</string>
+
+    <color name="theme_sea_primary">#00bcd4</color>
+    <color name="theme_sea_primary_dark">#0097a7</color>
+    <color name="theme_sea_accent">#6889ff</color>
+
+    <style name="AppTheme.Sea" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/theme_sea_primary</item>
+        <item name="colorPrimaryDark">@color/theme_sea_primary_dark</item>
+        <item name="colorAccent">@color/theme_sea_accent</item>
+    </style>
+
+</resources>

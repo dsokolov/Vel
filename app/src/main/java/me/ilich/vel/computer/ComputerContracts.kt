@@ -1,5 +1,6 @@
 package me.ilich.vel.computer
 
+import me.ilich.vel.model.Theme
 import me.ilich.vel.model.sources.AccelerationEntity
 import me.ilich.vel.model.sources.LocationEntity
 import me.ilich.vel.model.sources.OrientationEntity
@@ -19,9 +20,12 @@ object ComputerContracts {
         fun updateAngleStateFlat()
         fun updateSpeed(speed: String)
         fun updateSpeedUnit(unitResIt: Int)
+        fun updateGpsStatus(status: Boolean)
         fun userCalibrate(): Observable<Unit>
         fun userToSettings(): Observable<Unit>
         fun userToAbout(): Observable<Unit>
+        fun configureLogger()
+        fun updateTheme(it: Theme)
     }
 
     interface Interactor : Contracts.Interactor {
@@ -34,6 +38,7 @@ object ComputerContracts {
         fun location(): Observable<LocationEntity>
         fun acceleration(): Observable<AccelerationEntity>
         fun calibrate(orientation: OrientationEntity): Observable<Unit>
+        fun themeObservable(): Observable<Theme>
     }
 
     interface Presenter : Contracts.Presenter {

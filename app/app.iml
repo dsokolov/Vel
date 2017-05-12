@@ -51,6 +51,7 @@
       <sourceFolder url="file://$MODULE_DIR$/build/generated/source/apt/debug" isTestSource="false" generated="true" />
       <sourceFolder url="file://$MODULE_DIR$/build/generated/res/rs/debug" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/build/generated/res/resValues/debug" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/kapt/debugUnitTest" isTestSource="true" generated="true" />
       <sourceFolder url="file://$MODULE_DIR$/build/generated/source/kapt/debugAndroidTest" isTestSource="true" generated="true" />
       <sourceFolder url="file://$MODULE_DIR$/build/generated/source/r/androidTest/debug" isTestSource="true" generated="true" />
       <sourceFolder url="file://$MODULE_DIR$/build/generated/source/aidl/androidTest/debug" isTestSource="true" generated="true" />
@@ -59,7 +60,6 @@
       <sourceFolder url="file://$MODULE_DIR$/build/generated/source/apt/androidTest/debug" isTestSource="true" generated="true" />
       <sourceFolder url="file://$MODULE_DIR$/build/generated/res/rs/androidTest/debug" type="java-test-resource" />
       <sourceFolder url="file://$MODULE_DIR$/build/generated/res/resValues/androidTest/debug" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/kapt/debugUnitTest" isTestSource="true" generated="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/debug/res" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/debug/resources" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/debug/assets" type="java-resource" />
@@ -124,51 +124,55 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" exported="" scope="TEST" name="runner-0.5" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="espresso-idling-resource-2.2.2" level="project" />
-    <orderEntry type="library" exported="" name="constraint-layout-1.0.2" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="hamcrest-library-1.3" level="project" />
     <orderEntry type="library" exported="" name="relinker-1.2.2" level="project" />
-    <orderEntry type="library" exported="" name="play-services-base-10.2.4" level="project" />
     <orderEntry type="library" exported="" name="transition-25.3.1" level="project" />
+    <orderEntry type="library" exported="" name="play-services-location-10.2.4" level="project" />
+    <orderEntry type="library" exported="" scope="TEST" name="exposed-instrumentation-api-publish-0.5" level="project" />
+    <orderEntry type="library" exported="" name="rxjava-1.2.9" level="project" />
+    <orderEntry type="library" exported="" name="rxbinding-kotlin-0.4.0" level="project" />
+    <orderEntry type="library" exported="" name="rxkotlin-0.60.0" level="project" />
+    <orderEntry type="library" exported="" scope="TEST" name="javax.annotation-api-1.2" level="project" />
+    <orderEntry type="library" exported="" name="play-services-basement-10.2.4" level="project" />
+    <orderEntry type="library" exported="" name="reactivesensors-0.1.2" level="project" />
+    <orderEntry type="library" exported="" scope="TEST" name="javawriter-2.1.1" level="project" />
+    <orderEntry type="library" exported="" name="support-v4-25.3.1" level="project" />
+    <orderEntry type="library" exported="" name="support-media-compat-25.3.1" level="project" />
+    <orderEntry type="library" exported="" name="support-annotations-25.3.1" level="project" />
+    <orderEntry type="library" exported="" name="support-vector-drawable-25.3.1" level="project" />
+    <orderEntry type="library" exported="" name="support-compat-25.3.1" level="project" />
+    <orderEntry type="library" exported="" name="constraint-layout-1.0.2" level="project" />
+    <orderEntry type="library" exported="" name="play-services-base-10.2.4" level="project" />
     <orderEntry type="library" exported="" name="play-services-tasks-10.2.4" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="hamcrest-integration-1.3" level="project" />
     <orderEntry type="library" exported="" name="kotlin-stdlib-jre7-1.1.2-3" level="project" />
     <orderEntry type="library" exported="" name="design-25.3.1" level="project" />
     <orderEntry type="library" exported="" name="support-core-ui-25.3.1" level="project" />
+    <orderEntry type="library" exported="" name="logback-android-core-1.1.1-6" level="project" />
     <orderEntry type="library" exported="" name="rxsensor-1.1.1" level="project" />
-    <orderEntry type="library" exported="" name="play-services-location-10.2.4" level="project" />
+    <orderEntry type="library" exported="" name="slf4j-api-1.7.21" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="jsr305-2.0.1" level="project" />
     <orderEntry type="library" exported="" name="support-core-utils-25.3.1" level="project" />
     <orderEntry type="library" exported="" name="support-fragment-25.3.1" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="espresso-core-2.2.2" level="project" />
-    <orderEntry type="library" exported="" scope="TEST" name="exposed-instrumentation-api-publish-0.5" level="project" />
-    <orderEntry type="library" exported="" name="rxjava-1.2.9" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="rules-0.5" level="project" />
     <orderEntry type="library" exported="" name="constraint-layout-solver-1.0.2" level="project" />
-    <orderEntry type="library" exported="" name="rxbinding-kotlin-0.4.0" level="project" />
     <orderEntry type="library" exported="" name="rxpermissions-0.9.1" level="project" />
-    <orderEntry type="library" exported="" name="rxkotlin-0.60.0" level="project" />
-    <orderEntry type="library" exported="" scope="TEST" name="javax.annotation-api-1.2" level="project" />
     <orderEntry type="library" exported="" name="realm-annotations-3.1.0" level="project" />
     <orderEntry type="library" exported="" name="annotations-13.0" level="project" />
     <orderEntry type="library" exported="" name="android-reactive-location-0.10" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="javax.inject-1" level="project" />
-    <orderEntry type="library" exported="" name="play-services-basement-10.2.4" level="project" />
     <orderEntry type="library" exported="" name="rxandroid-1.2.1" level="project" />
-    <orderEntry type="library" exported="" name="reactivesensors-0.1.2" level="project" />
-    <orderEntry type="library" exported="" scope="TEST" name="javawriter-2.1.1" level="project" />
-    <orderEntry type="library" exported="" name="support-v4-25.3.1" level="project" />
-    <orderEntry type="library" exported="" name="support-media-compat-25.3.1" level="project" />
+    <orderEntry type="library" exported="" name="apktool-lib-1.4.4-3" level="project" />
     <orderEntry type="library" exported="" name="rxbinding-0.4.0" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="hamcrest-core-1.3" level="project" />
     <orderEntry type="library" exported="" name="rx-preferences-1.0.2" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="junit-4.12" level="project" />
     <orderEntry type="library" exported="" name="recyclerview-v7-25.3.1" level="project" />
     <orderEntry type="library" exported="" name="kotlin-stdlib-1.1.2-3" level="project" />
-    <orderEntry type="library" exported="" name="support-annotations-25.3.1" level="project" />
     <orderEntry type="library" exported="" name="realm-android-library-3.1.0" level="project" />
     <orderEntry type="library" exported="" name="appcompat-v7-25.3.1" level="project" />
-    <orderEntry type="library" exported="" name="support-vector-drawable-25.3.1" level="project" />
-    <orderEntry type="library" exported="" name="support-compat-25.3.1" level="project" />
     <orderEntry type="library" exported="" name="animated-vector-drawable-25.3.1" level="project" />
+    <orderEntry type="library" exported="" name="logback-android-classic-1.1.1-6" level="project" />
   </component>
 </module>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="theme_forest_id" translatable="false">FOREST</string>
+
+    <string name="theme_forest_title">Wood</string>
+
+    <color name="theme_forest_primary">#259b24</color>
+    <color name="theme_forest_primary_dark">#0a7e07</color>
+    <color name="theme_forest_accent">#5af158</color>
+
+    <style name="AppTheme.Forest" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/theme_forest_primary</item>
+        <item name="colorPrimaryDark">@color/theme_forest_primary_dark</item>
+        <item name="colorAccent">@color/theme_forest_accent</item>
+    </style>
+
+</resources>

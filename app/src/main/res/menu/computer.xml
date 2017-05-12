@@ -4,11 +4,11 @@
     <item
         android:id="@+id/menu_settings"
         android:icon="@android:drawable/ic_menu_manage"
-        android:title="Settings" />
+        android:title="@string/menu_settings" />
 
     <item
         android:id="@+id/menu_about"
-        android:icon="@android:drawable/ic_menu_manage"
-        android:title="About" />
+        android:icon="@android:drawable/ic_menu_help"
+        android:title="@string/menu_about" />
 
 </menu>

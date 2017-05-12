@@ -12,21 +12,29 @@ import rx.schedulers.Schedulers
 data class LocationEntity(
         val latitude: Latitude,
         val longitude: Longitude,
-        val speed: MpsSpeed
+        val speed: MpsSpeed,
+        val time: Long,
+        val accuracy: Float,
+        val provider: String,
+        val bearing: Float
 )
 
-fun gpsObservable(context: Context): Observable<LocationEntity> {
+fun locationObservable(context: Context): Observable<LocationEntity> {
     val locationProvider = ReactiveLocationProvider(context)
-    val locationRequest = LocationRequest.create().
-            setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY).
-            setInterval(500L)
+    val locationRequest = LocationRequest.create()
+            .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
+            .setInterval(100L)
     return locationProvider.getUpdatedLocation(locationRequest).
             subscribeOn(Schedulers.io()).
             map { location ->
                 LocationEntity(
                         latitude = location.latitude,
                         longitude = location.longitude,
-                        speed = location.speed
+                        speed = location.speed,
+                        time = location.time,
+                        accuracy = location.accuracy,
+                        provider = location.provider,
+                        bearing = location.bearing
                 )
             }.
             subscribeOn(Schedulers.computation())

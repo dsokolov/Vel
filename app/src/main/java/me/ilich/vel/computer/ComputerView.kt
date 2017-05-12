@@ -9,6 +9,8 @@ import android.widget.TextView
 import com.jakewharton.rxbinding.view.clicks
 import com.jakewharton.rxbinding.view.longClicks
 import me.ilich.vel.R
+import me.ilich.vel.configureLoggerPath
+import me.ilich.vel.model.Theme
 import rx.Observable
 
 class ComputerView(val activity: Activity) : ComputerContracts.View {
@@ -24,6 +26,7 @@ class ComputerView(val activity: Activity) : ComputerContracts.View {
     private lateinit var errorTextView: TextView
     private lateinit var angelTextView: TextView
     private lateinit var angelUnitTextView: TextView
+    private lateinit var gpsStatus: TextView
 
     private lateinit var stateAscentTextView: TextView
     private lateinit var stateDescentTextView: TextView
@@ -43,6 +46,8 @@ class ComputerView(val activity: Activity) : ComputerContracts.View {
         stateAscentTextView = activity.findViewById(R.id.state_ascent) as TextView
         stateDescentTextView = activity.findViewById(R.id.state_descent) as TextView
 
+        gpsStatus = activity.findViewById(R.id.gps_status) as TextView
+
         drawerLayout = activity.findViewById(R.id.drawer) as DrawerLayout
         navigationView = activity.findViewById(R.id.navigation) as NavigationView
         menuSettings = navigationView.menu.findItem(R.id.menu_settings)
@@ -59,6 +64,10 @@ class ComputerView(val activity: Activity) : ComputerContracts.View {
         } else {
             onFinish()
         }
+    }
+
+    override fun updateTheme(it: Theme) {
+        activity.setTheme(it.themeResId)
     }
 
     override fun updateTime(time: String) {
@@ -96,6 +105,14 @@ class ComputerView(val activity: Activity) : ComputerContracts.View {
         speedUnitTextView.setText(unitResIt)
     }
 
+    override fun updateGpsStatus(status: Boolean) {
+        gpsStatus.visibility = if (status) {
+            View.INVISIBLE
+        } else {
+            View.VISIBLE
+        }
+    }
+
     override fun updatePermissionsError(visible: Boolean) {
         errorTextView.visibility = if (visible) {
             View.VISIBLE
@@ -109,5 +126,9 @@ class ComputerView(val activity: Activity) : ComputerContracts.View {
     override fun userToSettings(): Observable<Unit> = menuSettings.clicks()
 
     override fun userToAbout(): Observable<Unit> = menuAbout.clicks()
+
+    override fun configureLogger() {
+        activity.configureLoggerPath()
+    }
 
 }

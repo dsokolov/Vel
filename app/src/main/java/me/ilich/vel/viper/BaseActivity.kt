@@ -2,6 +2,7 @@ package me.ilich.vel.viper
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import me.ilich.vel.R
 
 abstract class BaseActivity : AppCompatActivity() {
 

@@ -21,6 +21,20 @@ class ComputerPresenter(activity: Activity) : BasePresenter(activity) {
     override val interactor: ComputerContracts.Interactor = ComputerInteractor(activity)
     override val router: ComputerContracts.Router = ComputerRouter(activity)
 
+    private var themeSubscription: Subscription? = null
+
+    fun onBeforeCreate() {
+        themeSubscription = interactor.themeObservable()
+                .subscribe {
+                    view.updateTheme(it)
+                }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        themeSubscription?.unsubscribe()
+    }
+
     override fun startStopSubscriptions(): Array<Subscription> {
         val calibratedOrientation = interactor.calibratedOrientation()
         return arrayOf(
@@ -56,6 +70,7 @@ class ComputerPresenter(activity: Activity) : BasePresenter(activity) {
         return interactor.permissions().
                 observeOn(AndroidSchedulers.mainThread()).
                 subscribe {
+                    view.configureLogger()
                     view.updatePermissionsError(!it)
                     if (it) {
                         subscribeSpeed()
@@ -107,9 +122,9 @@ class ComputerPresenter(activity: Activity) : BasePresenter(activity) {
         addStartStopSubscription(
                 Observable.combineLatest(
                         interactor.speedUnitObservable(),
-                        interactor.location().map { it.speed }
-                ) { unit, speed ->
-                    val speedValue = String.format("%.0f", unit.convert(speed))
+                        interactor.location()
+                ) { unit, location ->
+                    val speedValue = String.format("%.0f", unit.convert(location.speed))
                     val speedUnit = unit.titleResId
                     SpeedEntity(speedValue, speedUnit)
                 }
