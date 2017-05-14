@@ -1,14 +1,27 @@
 <resources>
 
-    <color name="primary">#673ab7</color>
-    <color name="primary_dark">#512da8</color>
-    <color name="accent">#ff5177</color>
+    <color name="primary">#2ac92a</color>
+    <color name="primary_dark">#155b17</color>
+    <color name="accent">#ed093b</color>
+    <color name="window_background">#afeca5</color>
+    <color name="text">#225819</color>
+    <color name="warning">#fc3a18</color>
+    <dimen name="icon_size">36dp</dimen>
+    <dimen name="time_size">36sp</dimen>
+
+    <attr name="velIconSize" format="dimension" />
+    <attr name="velTimeSize" format="dimension" />
+    <attr name="velColorWarning" format="color" />
 
     <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
         <item name="colorPrimary">@color/primary</item>
         <item name="colorPrimaryDark">@color/primary_dark</item>
         <item name="colorAccent">@color/accent</item>
-        <item name="android:background">@color/primary</item>
+        <item name="android:windowBackground">@color/window_background</item>
+        <item name="android:textColor">@color/text</item>
+        <item name="velColorWarning">@color/warning</item>
+        <item name="velIconSize">@dimen/icon_size</item>
+        <item name="velTimeSize">@dimen/time_size</item>
     </style>
 
 </resources>

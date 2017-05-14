@@ -14,13 +14,12 @@
         android:padding="8dp">
 
         <ImageView
-            android:id="@+id/gps_status"
-            android:layout_width="36dp"
-            android:layout_height="36dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:src="@drawable/ic_location_on" />
+            android:id="@+id/menu"
+            android:layout_width="?attr/velIconSize"
+            android:layout_height="?attr/velIconSize"
+            android:src="@drawable/ic_menu"
+            android:tint="?android:textColor" />
+
 
         <TextView
             android:id="@+id/time"
@@ -29,17 +28,29 @@
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:textAlignment="center"
-            android:textSize="36sp"
+            android:textSize="?attr/velTimeSize"
+            tools:ignore="RelativeOverlap"
             tools:text="12:34" />
 
         <ImageView
             android:id="@+id/battery_status"
-            android:layout_width="36dp"
-            android:layout_height="36dp"
+            android:layout_width="?attr/velIconSize"
+            android:layout_height="?attr/velIconSize"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
-            android:src="@drawable/ic_battery_50" />
+            android:src="@drawable/ic_battery_50"
+            android:tint="?attr/velColorWarning" />
+
+        <ImageView
+            android:id="@+id/gps_status"
+            android:layout_width="?attr/velIconSize"
+            android:layout_height="?attr/velIconSize"
+            android:layout_alignParentTop="true"
+            android:layout_toLeftOf="@id/battery_status"
+            android:layout_toStartOf="@id/battery_status"
+            android:src="@drawable/ic_location_on"
+            android:tint="?android:textColor" />
 
         <TextView
             android:id="@+id/speed_value"

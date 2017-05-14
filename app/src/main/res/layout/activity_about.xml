@@ -16,15 +16,22 @@
 
     </FrameLayout>
 
-    <FrameLayout
+    <LinearLayout
         android:id="@+id/content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_below="@id/container_toolbar">
+        android:layout_below="@id/container_toolbar"
+        android:gravity="center"
+        android:orientation="vertical">
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/about_text_1"
+            android:textSize="18sp" />
 
-
-    </FrameLayout>
+    </LinearLayout>
 
 </RelativeLayout>

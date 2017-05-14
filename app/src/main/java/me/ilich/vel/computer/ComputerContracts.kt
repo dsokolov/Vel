@@ -1,5 +1,7 @@
 package me.ilich.vel.computer
 
+import me.ilich.vel.model.BatteryStatus
+import me.ilich.vel.model.GpsStatus
 import me.ilich.vel.model.Theme
 import me.ilich.vel.model.sources.AccelerationEntity
 import me.ilich.vel.model.sources.LocationEntity
@@ -11,17 +13,13 @@ import java.util.*
 object ComputerContracts {
 
     interface View : Contracts.View {
-        fun updatePermissionsError(visible: Boolean)
+        fun updateGpsStatus(gpsStatus: GpsStatus)
+        fun updateBatteryStatus(batteryStatus: BatteryStatus)
         fun updateTime(time: String)
-        fun updateAngelValue(angel: String)
-        fun updateAngelUnit(unitResIt: Int)
-        fun updateAngleStateAscend()
-        fun updateAngleStateDescend()
-        fun updateAngleStateFlat()
-        fun updateSpeed(speed: String)
+        fun updateSpeedCurrent(speed: String)
+        fun updateSpeedMax(speed: String)
+        fun updateSpeedAvg(speed: String)
         fun updateSpeedUnit(unitResIt: Int)
-        fun updateGpsStatus(status: Boolean)
-        fun userCalibrate(): Observable<Unit>
         fun userToSettings(): Observable<Unit>
         fun userToAbout(): Observable<Unit>
         fun configureLogger()
