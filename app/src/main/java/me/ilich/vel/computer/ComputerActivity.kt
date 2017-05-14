@@ -35,12 +35,12 @@ class ComputerActivity : BaseActivity() {
     override fun onStart() {
         super.onStart()
         val intent = Intent(this, VelService::class.java)
-        bindService(intent, serviceConnection, Context.BIND_AUTO_CREATE)
+        //bindService(intent, serviceConnection, Context.BIND_AUTO_CREATE)
     }
 
     override fun onStop() {
         super.onStop()
-        unbindService(serviceConnection)
+        //unbindService(serviceConnection)
     }
 
 }

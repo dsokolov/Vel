@@ -22,6 +22,11 @@ object ComputerContracts {
         fun updateSpeedUnit(unitResIt: Int)
         fun userToSettings(): Observable<Unit>
         fun userToAbout(): Observable<Unit>
+        fun userMenu(): Observable<Unit>
+        fun userLocation(): Observable<Unit>
+        fun menuShow()
+        fun menuHide()
+        fun isMenuVisible(): Boolean
         fun configureLogger()
         fun updateTheme(it: Theme)
     }

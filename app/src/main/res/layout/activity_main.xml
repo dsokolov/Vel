@@ -104,6 +104,10 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
+        app:itemBackground="?attr/velColorBackground"
+        app:itemIconTint="?attr/velColorNormal"
+        app:itemTextColor="?attr/velColorNormal"
+        android:background="?attr/velColorBackground"
         app:menu="@menu/computer" />
 
 </android.support.v4.widget.DrawerLayout>

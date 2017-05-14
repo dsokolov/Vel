@@ -9,6 +9,8 @@
     <dimen name="icon_size">36dp</dimen>
     <dimen name="time_size">36sp</dimen>
 
+    <attr name="velColorNormal" format="color" />
+    <attr name="velColorBackground" format="color" />
     <attr name="velIconSize" format="dimension" />
     <attr name="velTimeSize" format="dimension" />
     <attr name="velColorWarning" format="color" />
@@ -17,8 +19,10 @@
         <item name="colorPrimary">@color/primary</item>
         <item name="colorPrimaryDark">@color/primary_dark</item>
         <item name="colorAccent">@color/accent</item>
-        <item name="android:windowBackground">@color/window_background</item>
-        <item name="android:textColor">@color/text</item>
+        <item name="android:windowBackground">?attr/velColorBackground</item>
+        <item name="android:textColor">?attr/velColorNormal</item>
+        <item name="velColorNormal">@color/text</item>
+        <item name="velColorBackground">@color/window_background</item>
         <item name="velColorWarning">@color/warning</item>
         <item name="velIconSize">@dimen/icon_size</item>
         <item name="velTimeSize">@dimen/time_size</item>

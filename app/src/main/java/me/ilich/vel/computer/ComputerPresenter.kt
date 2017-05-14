@@ -36,20 +36,21 @@ class ComputerPresenter(activity: Activity) : BasePresenter(activity) {
     }
 
     override fun startStopSubscriptions(): Array<Subscription> {
-        val calibratedOrientation = interactor.calibratedOrientation()
+        //val calibratedOrientation = interactor.calibratedOrientation()
         return arrayOf(
                 subscribePermissions(),
                 subscribeTime(),
-                subscribePitch(calibratedOrientation),
-                subscribeAcceleration(),
+//                subscribePitch(calibratedOrientation),
+                //subscribeAcceleration(),
 
-                view.userCalibrate().
+/*                view.userCalibrate().
                         flatMap { interactor.uncalibratedOrientation().first() }.
                         flatMap { it -> interactor.calibrate(it) }.
-                        subscribe(),
+                        subscribe(),*/
 
                 view.userToSettings().subscribe { router.settings() },
-                view.userToAbout().subscribe { router.about() }
+                view.userToAbout().subscribe { router.about() },
+                view.userMenu().subscribe { view.menuShow() }
 
         )
     }
@@ -71,14 +72,14 @@ class ComputerPresenter(activity: Activity) : BasePresenter(activity) {
                 observeOn(AndroidSchedulers.mainThread()).
                 subscribe {
                     view.configureLogger()
-                    view.updatePermissionsError(!it)
+                    //view.updatePermissionsError(!it)
                     if (it) {
                         subscribeSpeed()
                     }
                 }
     }
 
-    private fun subscribePitch(calibratedOrientation: Observable<OrientationEntity>) =
+/*    private fun subscribePitch(calibratedOrientation: Observable<OrientationEntity>) =
             Observable.combineLatest(
                     interactor.pitchUnitObservable(),
                     calibratedOrientation
@@ -109,7 +110,7 @@ class ComputerPresenter(activity: Activity) : BasePresenter(activity) {
                         }
                         view.updateAngelValue(it.angel)
                         view.updateAngelUnit(it.unit.titleResId)
-                    }
+                    }*/
 
     private fun subscribeTime(): Subscription =
             interactor.time().
@@ -131,7 +132,7 @@ class ComputerPresenter(activity: Activity) : BasePresenter(activity) {
                         .subscribeOn(Schedulers.computation())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe {
-                            view.updateSpeed(it.speedValue)
+                            view.updateSpeedCurrent(it.speedValue)
                             view.updateSpeedUnit(it.speedUnit)
                         }
         )
