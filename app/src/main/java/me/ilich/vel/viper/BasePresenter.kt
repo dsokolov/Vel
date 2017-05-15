@@ -7,19 +7,19 @@ import rx.subscriptions.CompositeSubscription
 
 abstract class BasePresenter(activity: Activity) : Contracts.Presenter {
 
-    abstract val view: Contracts.View
+    //abstract val view: Contracts.View
     abstract val interactor: Contracts.Interactor
     abstract val router: Contracts.Router
 
     private var startStopSubscription: CompositeSubscription? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        view.onCreate(savedInstanceState)
+      //  view.onCreate(savedInstanceState)
         interactor.onCreate(savedInstanceState)
     }
 
     override fun onDestroy() {
-        view.onDestroy()
+//        view.onDestroy()
         interactor.onDestroy()
     }
 
@@ -36,7 +36,7 @@ abstract class BasePresenter(activity: Activity) : Contracts.Presenter {
         startStopSubscription?.add(subscription)
     }
 
-    override fun onBackPressed(onFinish: () -> Unit) = view.onBackPressed(onFinish)
+  //  override fun onBackPressed(onFinish: () -> Unit) = view.onBackPressed(onFinish)
 
     protected abstract fun startStopSubscriptions(): Array<Subscription>
 

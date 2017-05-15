@@ -20,7 +20,7 @@ object Contracts {
         fun onDestroy()
         fun onStart()
         fun onStop()
-        fun onBackPressed(onFinish: () -> Unit)
+        //fun onBackPressed(onFinish: () -> Unit)
     }
 
     interface Entity

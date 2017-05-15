@@ -4,26 +4,24 @@ import android.app.Activity
 import android.os.Bundle
 import android.support.design.widget.NavigationView
 import android.support.v4.widget.DrawerLayout
-import android.view.*
+import android.view.Gravity
+import android.view.MenuItem
+import android.view.WindowManager
 import android.widget.ImageView
 import android.widget.TextView
 import com.jakewharton.rxbinding.view.clicks
+import me.ilich.vel.ActivityColor
 import me.ilich.vel.R
 import me.ilich.vel.configureLoggerPath
 import me.ilich.vel.getColorByAttrId
 import me.ilich.vel.model.BatteryStatus
 import me.ilich.vel.model.GpsStatus
 import me.ilich.vel.model.Theme
-import android.view.View.SYSTEM_UI_FLAG_FULLSCREEN
-import android.view.View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-
-
 
 
 class ComputerView(val activity: Activity) : ComputerContracts.View {
 
-
-    private var created = false
+    private val activityColor = ActivityColor(activity)
 
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var navigationView: NavigationView
@@ -40,14 +38,13 @@ class ComputerView(val activity: Activity) : ComputerContracts.View {
     private lateinit var avgSpeedTextView: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        activity.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        //activity.requestWindowFeature(Window.FEATURE_NO_TITLE);
         activity.window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
         activity.window.addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
         activity.setContentView(R.layout.activity_main)
         val decorView = activity.window.decorView
-        val uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_FULLSCREEN
-        decorView.setSystemUiVisibility(uiOptions)
-        created = true
+        //val uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_FULLSCREEN
+        //decorView.setSystemUiVisibility(uiOptions)
         menuImageView = activity.findViewById(R.id.menu) as ImageView
         timeTextView = activity.findViewById(R.id.time) as TextView
         speedTextView = activity.findViewById(R.id.speed_value) as TextView
@@ -57,27 +54,24 @@ class ComputerView(val activity: Activity) : ComputerContracts.View {
         navigationView = activity.findViewById(R.id.navigation) as NavigationView
         menuSettings = navigationView.menu.findItem(R.id.menu_settings)
         menuAbout = navigationView.menu.findItem(R.id.menu_about)
+
+        activityColor.created()
     }
 
     override fun onDestroy() {
         activity.window.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
     }
 
-    override fun onBackPressed(onFinish: () -> Unit) {
+/*    override fun onBackPressed(onFinish: () -> Unit) {
         if (drawerLayout.isDrawerOpen(Gravity.START)) {
             drawerLayout.closeDrawer(Gravity.START)
         } else {
             onFinish()
         }
-    }
+    }*/
 
-    override fun updateTheme(it: Theme) {
-        if (created) {
-            //activity.finish()
-            //activity.startActivity(activity.intent)
-        } else {
-            activity.setTheme(it.themeResId)
-        }
+    override fun updateTheme(theme: Theme) {
+        activityColor.changeTheme(theme)
     }
 
     override fun updateTime(time: String) {

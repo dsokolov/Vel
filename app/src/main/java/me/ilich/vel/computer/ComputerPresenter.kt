@@ -17,29 +17,15 @@ class ComputerPresenter(activity: Activity) : BasePresenter(activity) {
         private val SDF = SimpleDateFormat("HH:mm", Locale.getDefault())
     }
 
-    override val view: ComputerContracts.View = ComputerView(activity)
+//    override val view: ComputerContracts.View = ComputerView(activity)
     override val interactor: ComputerContracts.Interactor = ComputerInteractor(activity)
     override val router: ComputerContracts.Router = ComputerRouter(activity)
-
-    private var themeSubscription: Subscription? = null
-
-    fun onBeforeCreate() {
-        themeSubscription = interactor.themeObservable()
-                .subscribe {
-                    view.updateTheme(it)
-                }
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        themeSubscription?.unsubscribe()
-    }
 
     override fun startStopSubscriptions(): Array<Subscription> {
         //val calibratedOrientation = interactor.calibratedOrientation()
         return arrayOf(
-                subscribePermissions(),
-                subscribeTime(),
+//                subscribePermissions(),
+  //              subscribeTime(),
 //                subscribePitch(calibratedOrientation),
                 //subscribeAcceleration(),
 
@@ -48,9 +34,9 @@ class ComputerPresenter(activity: Activity) : BasePresenter(activity) {
                         flatMap { it -> interactor.calibrate(it) }.
                         subscribe(),*/
 
-                view.userToSettings().subscribe { router.settings() },
+/*                view.userToSettings().subscribe { router.settings() },
                 view.userToAbout().subscribe { router.about() },
-                view.userMenu().subscribe { view.menuShow() }
+                view.userMenu().subscribe { view.menuShow() }*/
 
         )
     }
@@ -67,17 +53,17 @@ class ComputerPresenter(activity: Activity) : BasePresenter(activity) {
                 subscribe { /*view.updateAcceleration(it)*/ }
     }
 
-    private fun subscribePermissions(): Subscription {
+/*    private fun subscribePermissions(): Subscription {
         return interactor.permissions().
                 observeOn(AndroidSchedulers.mainThread()).
                 subscribe {
-                    view.configureLogger()
+  //                  view.configureLogger()
                     //view.updatePermissionsError(!it)
                     if (it) {
                         subscribeSpeed()
                     }
                 }
-    }
+    }*/
 
 /*    private fun subscribePitch(calibratedOrientation: Observable<OrientationEntity>) =
             Observable.combineLatest(
@@ -112,14 +98,14 @@ class ComputerPresenter(activity: Activity) : BasePresenter(activity) {
                         view.updateAngelUnit(it.unit.titleResId)
                     }*/
 
-    private fun subscribeTime(): Subscription =
+/*    private fun subscribeTime(): Subscription =
             interactor.time().
                     map { SDF.format(it) }.
                     subscribeOn(Schedulers.computation()).
                     observeOn(AndroidSchedulers.mainThread()).
-                    subscribe { view.updateTime(it) }
+                    subscribe { view.updateTime(it) }*/
 
-    private fun subscribeSpeed() {
+/*    private fun subscribeSpeed() {
         addStartStopSubscription(
                 Observable.combineLatest(
                         interactor.speedUnitObservable(),
@@ -136,7 +122,7 @@ class ComputerPresenter(activity: Activity) : BasePresenter(activity) {
                             view.updateSpeedUnit(it.speedUnit)
                         }
         )
-    }
+    }*/
 
     private data class SpeedEntity(
             val speedValue: String,

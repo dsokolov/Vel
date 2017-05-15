@@ -28,10 +28,10 @@ abstract class BaseActivity : AppCompatActivity() {
         presenter.onStop()
     }
 
-    override fun onBackPressed() {
+/*    override fun onBackPressed() {
         presenter.onBackPressed {
             super.onBackPressed()
         }
-    }
+    }*/
 
 }

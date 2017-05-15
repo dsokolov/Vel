@@ -18,7 +18,7 @@
             android:layout_width="?attr/velIconSize"
             android:layout_height="?attr/velIconSize"
             android:src="@drawable/ic_menu"
-            android:tint="?android:textColor" />
+            android:tint="?attr/velColorNormal" />
 
 
         <TextView
@@ -50,7 +50,7 @@
             android:layout_toLeftOf="@id/battery_status"
             android:layout_toStartOf="@id/battery_status"
             android:src="@drawable/ic_location_on"
-            android:tint="?android:textColor" />
+            android:tint="?attr/velColorNormal" />
 
         <TextView
             android:id="@+id/speed_value"

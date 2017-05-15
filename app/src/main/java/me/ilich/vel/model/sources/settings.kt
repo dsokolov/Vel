@@ -6,6 +6,7 @@ import com.f2prateek.rx.preferences.RxSharedPreferences
 import me.ilich.vel.R
 import me.ilich.vel.model.Theme
 import rx.Observable
+import rx.schedulers.Schedulers
 
 fun themeObservable(context: Context): Observable<Theme> {
     val sp = PreferenceManager.getDefaultSharedPreferences(context)
@@ -17,6 +18,8 @@ fun themeObservable(context: Context): Observable<Theme> {
     val seaId = context.getString(R.string.theme_sea_id)
     val observable = preferences.getString(key, default)
             .asObservable()
+            .subscribeOn(Schedulers.io())
+            .observeOn(Schedulers.computation())
             .map {
                 when (it) {
                     forestId -> Theme.Forest()

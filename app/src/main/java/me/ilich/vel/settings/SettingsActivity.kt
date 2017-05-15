@@ -3,6 +3,7 @@ package me.ilich.vel.settings
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
+import rx.android.schedulers.AndroidSchedulers
 import rx.subscriptions.CompositeSubscription
 
 
@@ -17,10 +18,12 @@ class SettingsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         createSubscription.add(
-                interactor.theme().subscribe {
-                    view.updateTheme(it)
-                    view.inflate(savedInstanceState)
-                }
+                interactor.theme()
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe {
+                            view.updateTheme(it)
+                            view.inflate(savedInstanceState)
+                        }
         )
     }
 

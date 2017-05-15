@@ -1,5 +1,6 @@
 package me.ilich.vel.computer
 
+import android.os.Bundle
 import me.ilich.vel.model.BatteryStatus
 import me.ilich.vel.model.GpsStatus
 import me.ilich.vel.model.Theme
@@ -12,7 +13,9 @@ import java.util.*
 
 object ComputerContracts {
 
-    interface View : Contracts.View {
+    interface View {
+        fun onCreate(savedInstanceState: Bundle?)
+        fun onDestroy()
         fun updateGpsStatus(gpsStatus: GpsStatus)
         fun updateBatteryStatus(batteryStatus: BatteryStatus)
         fun updateTime(time: String)
@@ -28,7 +31,7 @@ object ComputerContracts {
         fun menuHide()
         fun isMenuVisible(): Boolean
         fun configureLogger()
-        fun updateTheme(it: Theme)
+        fun updateTheme(theme: Theme)
     }
 
     interface Interactor : Contracts.Interactor {
