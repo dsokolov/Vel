@@ -73,8 +73,8 @@ class ComputerView(val activity: Activity) : ComputerContracts.View {
 
     override fun updateTheme(it: Theme) {
         if (created) {
-            activity.finish()
-            activity.startActivity(activity.intent)
+            //activity.finish()
+            //activity.startActivity(activity.intent)
         } else {
             activity.setTheme(it.themeResId)
         }
