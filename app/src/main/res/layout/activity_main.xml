@@ -15,11 +15,10 @@
 
         <ImageView
             android:id="@+id/menu"
-            android:layout_width="?attr/velIconSize"
-            android:layout_height="?attr/velIconSize"
+            android:layout_width="@dimen/icon_size"
+            android:layout_height="@dimen/icon_size"
             android:src="@drawable/ic_menu"
             android:tint="?attr/velColorNormal" />
-
 
         <TextView
             android:id="@+id/time"
@@ -28,24 +27,24 @@
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:textAlignment="center"
-            android:textSize="?attr/velTimeSize"
+            android:textSize="@dimen/time_size"
             tools:ignore="RelativeOverlap"
             tools:text="12:34" />
 
         <ImageView
             android:id="@+id/battery_status"
-            android:layout_width="?attr/velIconSize"
-            android:layout_height="?attr/velIconSize"
+            android:layout_width="@dimen/icon_size"
+            android:layout_height="@dimen/icon_size"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
             android:src="@drawable/ic_battery_50"
-            android:tint="?attr/velColorWarning" />
+            android:tint="?attr/velColorLevelRed" />
 
         <ImageView
             android:id="@+id/gps_status"
-            android:layout_width="?attr/velIconSize"
-            android:layout_height="?attr/velIconSize"
+            android:layout_width="@dimen/icon_size"
+            android:layout_height="@dimen/icon_size"
             android:layout_alignParentTop="true"
             android:layout_toLeftOf="@id/battery_status"
             android:layout_toStartOf="@id/battery_status"
@@ -103,11 +102,11 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
+        android:background="?attr/velColorBackground"
         android:fitsSystemWindows="true"
         app:itemBackground="?attr/velColorBackground"
         app:itemIconTint="?attr/velColorNormal"
         app:itemTextColor="?attr/velColorNormal"
-        android:background="?attr/velColorBackground"
         app:menu="@menu/computer" />
 
 </android.support.v4.widget.DrawerLayout>

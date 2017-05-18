@@ -1,13 +1,8 @@
 package me.ilich.vel.computer
 
 import android.app.Activity
-import android.support.annotation.StringRes
-import me.ilich.vel.model.sources.OrientationEntity
 import me.ilich.vel.viper.BasePresenter
-import rx.Observable
 import rx.Subscription
-import rx.android.schedulers.AndroidSchedulers
-import rx.schedulers.Schedulers
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -17,15 +12,15 @@ class ComputerPresenter(activity: Activity) : BasePresenter(activity) {
         private val SDF = SimpleDateFormat("HH:mm", Locale.getDefault())
     }
 
-//    override val view: ComputerContracts.View = ComputerView(activity)
+    //    override val view: ComputerContracts.View = ComputerView(activity)
     override val interactor: ComputerContracts.Interactor = ComputerInteractor(activity)
     override val router: ComputerContracts.Router = ComputerRouter(activity)
 
     override fun startStopSubscriptions(): Array<Subscription> {
         //val calibratedOrientation = interactor.calibratedOrientation()
         return arrayOf(
-//                subscribePermissions(),
-  //              subscribeTime(),
+                //                subscribePermissions(),
+                //              subscribeTime(),
 //                subscribePitch(calibratedOrientation),
                 //subscribeAcceleration(),
 
@@ -39,18 +34,6 @@ class ComputerPresenter(activity: Activity) : BasePresenter(activity) {
                 view.userMenu().subscribe { view.menuShow() }*/
 
         )
-    }
-
-    private fun subscribeAcceleration(): Subscription {
-        return interactor.acceleration().
-                map { acceleration ->
-                    //val ac = Math.sqrt((a.x * a.x + a.y * a.y + a.z * a.z).toDouble()).toFloat()
-                    //accelerationTextView.text = String.format("%.2f", ac)
-                    String.format("%.2f", acceleration.y)
-                }.
-                subscribeOn(Schedulers.computation()).
-                observeOn(AndroidSchedulers.mainThread()).
-                subscribe { /*view.updateAcceleration(it)*/ }
     }
 
 /*    private fun subscribePermissions(): Subscription {
@@ -123,10 +106,5 @@ class ComputerPresenter(activity: Activity) : BasePresenter(activity) {
                         }
         )
     }*/
-
-    private data class SpeedEntity(
-            val speedValue: String,
-            @StringRes val speedUnit: Int
-    )
 
 }

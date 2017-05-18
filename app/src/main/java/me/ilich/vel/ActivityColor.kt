@@ -20,8 +20,8 @@ class ActivityColor(val activity: Activity) {
             activity.setTheme(theme.themeResId)
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 val window = activity.window
-                window.statusBarColor = activity.getColorByAttrId(R.attr.velColorNavbar)
-                window.navigationBarColor = activity.getColorByAttrId(R.attr.velColorNavbar)
+                window.statusBarColor = activity.getColorByAttrId(R.attr.velColorNormal)
+                window.navigationBarColor = activity.getColorByAttrId(R.attr.velColorNormal)
             }
         }
     }

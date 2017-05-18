@@ -5,16 +5,19 @@
     <color name="accent">#000</color>
     <color name="window_background">#fff</color>
     <color name="text">#111</color>
-    <color name="warning">#fc3a18</color>
+    <color name="level_gray">#8c8c8c</color>
+    <color name="level_green">#48744f</color>
+    <color name="level_yellow">#e2d405</color>
+    <color name="level_red">#fc3a18</color>
     <dimen name="icon_size">36dp</dimen>
     <dimen name="time_size">36sp</dimen>
 
-    <attr name="velColorNavbar" format="color" />
-    <attr name="velColorNormal" format="color" />
     <attr name="velColorBackground" format="color" />
-    <attr name="velIconSize" format="dimension" />
-    <attr name="velTimeSize" format="dimension" />
-    <attr name="velColorWarning" format="color" />
+    <attr name="velColorNormal" format="color" />
+    <attr name="velColorLevelGray" format="color" />
+    <attr name="velColorLevelGreen" format="color" />
+    <attr name="velColorLevelYellow" format="color" />
+    <attr name="velColorLevelRed" format="color" />
 
     <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
         <item name="colorPrimary">@color/primary</item>
@@ -22,12 +25,12 @@
         <item name="colorAccent">@color/accent</item>
         <item name="android:windowBackground">?attr/velColorBackground</item>
         <item name="android:textColor">?attr/velColorNormal</item>
-<!--        <item name="velColorNavbar">#f0f</item>-->
         <item name="velColorNormal">@color/text</item>
         <item name="velColorBackground">@color/window_background</item>
-        <item name="velColorWarning">@color/warning</item>
-        <item name="velIconSize">@dimen/icon_size</item>
-        <item name="velTimeSize">@dimen/time_size</item>
+        <item name="velColorLevelGray">@color/level_gray</item>
+        <item name="velColorLevelGreen">@color/level_green</item>
+        <item name="velColorLevelYellow">@color/level_yellow</item>
+        <item name="velColorLevelRed">@color/level_red</item>
     </style>
 
 </resources>

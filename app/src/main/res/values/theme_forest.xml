@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
 
     <string name="theme_forest_id" translatable="false">FOREST</string>
 
@@ -14,9 +14,6 @@
         <item name="colorPrimary">@color/theme_forest_primary</item>
         <item name="colorPrimaryDark">@color/theme_forest_primary_dark</item>
         <item name="colorAccent">@color/theme_forest_accent</item>
-        <item name="velColorNavbar">@color/theme_forest_primary_dark</item>
-        <item name="velColorBackground">@color/theme_forest_background</item>
-        <item name="velColorNormal">@color/theme_forest_primary</item>
     </style>
 
 </resources>

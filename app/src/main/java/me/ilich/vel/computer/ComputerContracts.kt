@@ -37,14 +37,10 @@ object ComputerContracts {
     interface Interactor : Contracts.Interactor {
         fun permissions(): Observable<Boolean>
         fun time(): Observable<Date>
-        fun calibratedOrientation(): Observable<OrientationEntity>
-        fun uncalibratedOrientation(): Observable<OrientationEntity>
         fun speedUnitObservable(): Observable<SpeedUnitEntity>
-        fun pitchUnitObservable(): Observable<PitchUnitEntity>
         fun location(): Observable<LocationEntity>
-        fun acceleration(): Observable<AccelerationEntity>
-        fun calibrate(orientation: OrientationEntity): Observable<Unit>
         fun themeObservable(): Observable<Theme>
+        fun batteryStatus(): Observable<BatteryStatus>
     }
 
     interface Presenter : Contracts.Presenter {

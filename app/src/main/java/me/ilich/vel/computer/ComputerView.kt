@@ -42,10 +42,12 @@ class ComputerView(val activity: Activity) : ComputerContracts.View {
         activity.window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
         activity.window.addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
         activity.setContentView(R.layout.activity_main)
-        val decorView = activity.window.decorView
+        //val decorView = activity.window.decorView
         //val uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_FULLSCREEN
         //decorView.setSystemUiVisibility(uiOptions)
         menuImageView = activity.findViewById(R.id.menu) as ImageView
+        gpsStatusImageView = activity.findViewById(R.id.gps_status) as ImageView
+        batteryStatusImageView = activity.findViewById(R.id.battery_status) as ImageView
         timeTextView = activity.findViewById(R.id.time) as TextView
         speedTextView = activity.findViewById(R.id.speed_value) as TextView
         speedUnitTextView = activity.findViewById(R.id.speed_unit) as TextView
@@ -61,14 +63,6 @@ class ComputerView(val activity: Activity) : ComputerContracts.View {
     override fun onDestroy() {
         activity.window.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
     }
-
-/*    override fun onBackPressed(onFinish: () -> Unit) {
-        if (drawerLayout.isDrawerOpen(Gravity.START)) {
-            drawerLayout.closeDrawer(Gravity.START)
-        } else {
-            onFinish()
-        }
-    }*/
 
     override fun updateTheme(theme: Theme) {
         activityColor.changeTheme(theme)
@@ -125,19 +119,52 @@ class ComputerView(val activity: Activity) : ComputerContracts.View {
             }
             GpsStatus.ERROR -> {
                 gpsStatusImageView.setImageResource(R.drawable.ic_location_off)
-                val color = activity.getColorByAttrId(R.attr.velColorWarning)
+                val color = activity.getColorByAttrId(R.attr.velColorLevelYellow)
                 gpsStatusImageView.setColorFilter(color)
             }
             GpsStatus.NEED_PERMISSION -> {
                 gpsStatusImageView.setImageResource(R.drawable.ic_location_off)
-                val color = activity.getColorByAttrId(R.attr.velColorWarning)
+                val color = activity.getColorByAttrId(R.attr.velColorLevelRed)
                 gpsStatusImageView.setColorFilter(color)
             }
         }
     }
 
     override fun updateBatteryStatus(batteryStatus: BatteryStatus) {
-        //TODO
+        when (batteryStatus.level) {
+            in 0..20 -> {
+                batteryStatusImageView.setImageResource(R.drawable.ic_battery_20)
+                batteryStatusImageView.setColorFilter(activity.getColorByAttrId(R.attr.velColorLevelRed))
+            }
+            in 20..30 -> {
+                batteryStatusImageView.setImageResource(R.drawable.ic_battery_30)
+                batteryStatusImageView.setColorFilter(activity.getColorByAttrId(R.attr.velColorLevelYellow))
+            }
+            in 30..50 -> {
+                batteryStatusImageView.setImageResource(R.drawable.ic_battery_50)
+                batteryStatusImageView.setColorFilter(activity.getColorByAttrId(R.attr.velColorLevelGreen))
+            }
+            in 50..60 -> {
+                batteryStatusImageView.setImageResource(R.drawable.ic_battery_60)
+                batteryStatusImageView.setColorFilter(activity.getColorByAttrId(R.attr.velColorLevelGreen))
+            }
+            in 60..80 -> {
+                batteryStatusImageView.setImageResource(R.drawable.ic_battery_80)
+                batteryStatusImageView.setColorFilter(activity.getColorByAttrId(R.attr.velColorLevelGreen))
+            }
+            in 80..90 -> {
+                batteryStatusImageView.setImageResource(R.drawable.ic_battery_90)
+                batteryStatusImageView.setColorFilter(activity.getColorByAttrId(R.attr.velColorLevelGreen))
+            }
+            in 90..100 -> {
+                batteryStatusImageView.setImageResource(R.drawable.ic_battery_full)
+                batteryStatusImageView.setColorFilter(activity.getColorByAttrId(R.attr.velColorLevelGreen))
+            }
+            else -> {
+                batteryStatusImageView.setImageResource(R.drawable.ic_battery_unknown)
+                batteryStatusImageView.setColorFilter(activity.getColorByAttrId(R.attr.velColorLevelGray))
+            }
+        }
     }
 
 }

@@ -11,13 +11,12 @@ import com.nvanbenschoten.rxsensor.RxSensorManager
 import com.tbruyelle.rxpermissions.RxPermissions
 import io.realm.Realm
 import me.ilich.vel.R
+import me.ilich.vel.model.BatteryStatus
 import me.ilich.vel.model.Theme
-import me.ilich.vel.model.realm.RealmCalibration
-import me.ilich.vel.model.realm.firstOrCreate
-import me.ilich.vel.model.realm.transactionObservable
-import me.ilich.vel.model.sources.*
+import me.ilich.vel.model.sources.LocationEntity
+import me.ilich.vel.model.sources.locationObservable
+import me.ilich.vel.model.sources.themeObservable
 import rx.Observable
-import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
 import java.util.*
 import java.util.concurrent.TimeUnit
@@ -57,45 +56,8 @@ class ComputerInteractor(val activity: Activity) : ComputerContracts.Interactor 
                     map { Date() }.
                     subscribeOn(Schedulers.computation())
 
-    override fun calibratedOrientation(): Observable<OrientationEntity> {
-        val calibrationObservable = realm.where(RealmCalibration::class.java).
-                findAllAsync().
-                asObservable().
-                map {
-                    if (it.isEmpty()) {
-                        0f
-                    } else {
-                        it.first().pitch
-                    }
-                }.
-                subscribeOn(AndroidSchedulers.mainThread())
-        val orientationObservable = orientationObservable(rxSensor)
-        val result = Observable.
-                combineLatest(orientationObservable, calibrationObservable) { orientation, calibration ->
-                    OrientationEntity(
-                            roll = orientation.roll,
-                            pitch = orientation.pitch - calibration,
-                            yaw = orientation.yaw
-                    )
-                }.
-                subscribeOn(Schedulers.computation())
-        return result
-    }
-
-    override fun uncalibratedOrientation(): Observable<OrientationEntity> =
-            orientationObservable(rxSensor)
-
     override fun location(): Observable<LocationEntity> =
             locationObservable(activity)
-
-    override fun calibrate(orientation: OrientationEntity): Observable<Unit> =
-            realm.transactionObservable { realm ->
-                val r = realm.firstOrCreate(RealmCalibration::class.java)
-                r.pitch = orientation.pitch
-            }.observeOn(AndroidSchedulers.mainThread())
-
-    override fun acceleration(): Observable<AccelerationEntity> =
-            accelerationObservable(rxSensor)
 
     override fun speedUnitObservable(): Observable<SpeedUnitEntity> {
         val key = activity.getString(R.string.preference_speed_key)
@@ -116,23 +78,10 @@ class ComputerInteractor(val activity: Activity) : ComputerContracts.Interactor 
                 .subscribeOn(Schedulers.computation())
     }
 
-    override fun pitchUnitObservable(): Observable<PitchUnitEntity> {
-        val key = activity.getString(R.string.preference_pitch_key)
-        val default = activity.getString(R.string.preference_pitch_default)
-        val degree = activity.getString(R.string.preference_pitch_value_degree)
-        val percent = activity.getString(R.string.preference_pitch_value_percent)
-        return preferences.getString(key, default)
-                .asObservable()
-                .flatMap {
-                    when (it) {
-                        degree -> Observable.just(PitchUnitEntity.Degree())
-                        percent -> Observable.just(PitchUnitEntity.Percent())
-                        else -> Observable.error(RuntimeException("unknown unit $it"))
-                    }
-                }
-                .subscribeOn(Schedulers.computation())
-    }
-
     override fun themeObservable(): Observable<Theme> = themeObservable(activity)
+
+    override fun batteryStatus(): Observable<BatteryStatus> {
+        TODO("implement batteryStatus")
+    }
 
 }

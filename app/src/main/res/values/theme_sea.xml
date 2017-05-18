@@ -14,9 +14,6 @@
         <item name="colorPrimary">@color/theme_sea_primary</item>
         <item name="colorPrimaryDark">@color/theme_sea_primary_dark</item>
         <item name="colorAccent">@color/theme_sea_accent</item>
-        <item name="velColorNavbar">@color/theme_sea_primary_dark</item>
-        <item name="velColorBackground">@color/theme_sea_background</item>
-        <item name="velColorNormal">@color/theme_sea_primary</item>
     </style>
 
 </resources>
