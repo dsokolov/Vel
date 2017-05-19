@@ -12,7 +12,6 @@ import me.ilich.vel.model.sources.locationObservable
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
 import rx.subscriptions.CompositeSubscription
-import java.util.*
 
 class VelService : Service() {
 
@@ -49,14 +48,17 @@ class VelService : Service() {
                         }
                         .observeOn(Schedulers.computation())
                         .map {
-                            val avg = it.average().let {
-                                if (it.isNaN()) {
-                                    0f
-                                } else {
-                                    it.toFloat()
-                                }
-                            }
-                            val max = it.max() ?: 0f
+                            val avg = it.filter { it > 0f }
+                                    .average()
+                                    .let {
+                                        if (it.isNaN()) {
+                                            0f
+                                        } else {
+                                            it.toFloat()
+                                        }
+                                    }
+                            val max = it.filter { it > 0f }
+                                    .max() ?: 0f
                             val last = it.firstOrNull() ?: 0f
                             SpeedSummary(avg, max, last)
                         }
