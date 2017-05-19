@@ -69,6 +69,12 @@ dependencies {
     kapt 'com.jakewharton:butterknife-compiler:8.6.0'
     //endregion
 
+    //region LeakCanary
+    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5.1'
+    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.1'
+    testCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.1'
+    //endregion
+
 }
 
 kapt {

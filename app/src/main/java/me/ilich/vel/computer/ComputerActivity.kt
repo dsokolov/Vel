@@ -53,8 +53,14 @@ class ComputerActivity : AppCompatActivity() {
                         .subscribe {
                             view.updateTheme(it)
                             view.onCreate(savedInstanceState)
-                            view.userToSettings().subscribe { router.settings() }
-                            view.userToAbout().subscribe { router.about() }
+                            view.userToSettings().subscribe {
+                                router.settings()
+                                view.menuHide()
+                            }
+                            view.userToAbout().subscribe {
+                                router.about()
+                                view.menuHide()
+                            }
                             view.userResetSpeed().flatMap { interactor.speedReset() }.subscribe { view.menuHide() }
                             view.userMenu().subscribe { view.menuShow() }
                             viewInflated = true
