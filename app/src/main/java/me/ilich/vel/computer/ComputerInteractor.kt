@@ -2,21 +2,23 @@ package me.ilich.vel.computer
 
 import android.Manifest
 import android.app.Activity
-import android.content.Context
-import android.hardware.SensorManager
 import android.os.Bundle
 import android.preference.PreferenceManager
 import com.f2prateek.rx.preferences.RxSharedPreferences
-import com.nvanbenschoten.rxsensor.RxSensorManager
 import com.tbruyelle.rxpermissions.RxPermissions
 import io.realm.Realm
+import me.ilich.vel.MpsSpeed
 import me.ilich.vel.R
 import me.ilich.vel.model.BatteryStatus
 import me.ilich.vel.model.Theme
+import me.ilich.vel.model.realm.RealmMotion
+import me.ilich.vel.model.realm.RealmSpeedSummary
+import me.ilich.vel.model.realm.transactionObservable
 import me.ilich.vel.model.sources.LocationEntity
 import me.ilich.vel.model.sources.locationObservable
 import me.ilich.vel.model.sources.themeObservable
 import rx.Observable
+import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
 import java.util.*
 import java.util.concurrent.TimeUnit
@@ -26,22 +28,18 @@ class ComputerInteractor(val activity: Activity) : ComputerContracts.Interactor 
     companion object {
 
         private val PERMISSIONS = arrayOf(
-                Manifest.permission.ACCESS_FINE_LOCATION,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE
+                Manifest.permission.ACCESS_FINE_LOCATION
         )
 
     }
 
     private lateinit var rxPermissions: RxPermissions
-    private lateinit var rxSensor: RxSensorManager
     private lateinit var realm: Realm
     private lateinit var preferences: RxSharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         rxPermissions = RxPermissions(activity)
         realm = Realm.getDefaultInstance()
-        val sensorManager = activity.getSystemService(Context.SENSOR_SERVICE) as SensorManager
-        rxSensor = RxSensorManager(sensorManager)
         preferences = RxSharedPreferences.create(PreferenceManager.getDefaultSharedPreferences(activity))
     }
 
@@ -84,4 +82,30 @@ class ComputerInteractor(val activity: Activity) : ComputerContracts.Interactor 
         TODO("implement batteryStatus")
     }
 
+    override fun speedCurrent(): Observable<MpsSpeed> =
+            realm.where(RealmSpeedSummary::class.java)
+                    .findAllAsync()
+                    .asObservable()
+                    .map { it.firstOrNull()?.speedLast ?: 0f }
+                    .subscribeOn(AndroidSchedulers.mainThread())
+
+    override fun speedMax(): Observable<MpsSpeed> =
+            realm.where(RealmSpeedSummary::class.java)
+                    .findAllAsync()
+                    .asObservable()
+                    .map { it.firstOrNull()?.speedMax ?: 0f }
+                    .subscribeOn(AndroidSchedulers.mainThread())
+
+    override fun speedAvg(): Observable<MpsSpeed> =
+            realm.where(RealmSpeedSummary::class.java)
+                    .findAllAsync()
+                    .asObservable()
+                    .map { it.firstOrNull()?.speedAvg ?: 0f }
+                    .subscribeOn(AndroidSchedulers.mainThread())
+
+    override fun speedReset(): Observable<Unit> =
+            realm.transactionObservable { realm ->
+                realm.delete(RealmSpeedSummary::class.java)
+                realm.delete(RealmMotion::class.java)
+            }
 }

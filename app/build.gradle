@@ -64,7 +64,17 @@ dependencies {
     annotationProcessor 'com.google.dagger:dagger-android-processor:2.11-rc2'
     //endregion
 
+    //region ButterKnife
+    compile 'com.jakewharton:butterknife:8.6.0'
+    kapt 'com.jakewharton:butterknife-compiler:8.6.0'
+    //endregion
+
 }
+
+kapt {
+    generateStubs = true
+}
+
 repositories {
     mavenCentral()
 }

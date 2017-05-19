@@ -9,6 +9,8 @@ import android.view.MenuItem
 import android.view.WindowManager
 import android.widget.ImageView
 import android.widget.TextView
+import butterknife.BindView
+import butterknife.ButterKnife
 import com.jakewharton.rxbinding.view.clicks
 import me.ilich.vel.ActivityColor
 import me.ilich.vel.R
@@ -23,39 +25,34 @@ class ComputerView(val activity: Activity) : ComputerContracts.View {
 
     private val activityColor = ActivityColor(activity)
 
-    private lateinit var drawerLayout: DrawerLayout
-    private lateinit var navigationView: NavigationView
+    @BindView(R.id.drawer) lateinit var drawerLayout: DrawerLayout
+    @BindView(R.id.navigation) lateinit var navigationView: NavigationView
     private lateinit var menuSettings: MenuItem
     private lateinit var menuAbout: MenuItem
+    private lateinit var menuResetSpeed: MenuItem
 
-    private lateinit var menuImageView: ImageView
-    private lateinit var gpsStatusImageView: ImageView
-    private lateinit var batteryStatusImageView: ImageView
-    private lateinit var timeTextView: TextView
-    private lateinit var speedTextView: TextView
-    private lateinit var speedUnitTextView: TextView
-    private lateinit var maxSpeedTextView: TextView
-    private lateinit var avgSpeedTextView: TextView
+    @BindView(R.id.menu) lateinit var menuImageView: ImageView
+    @BindView(R.id.gps_status) lateinit var gpsStatusImageView: ImageView
+    @BindView(R.id.battery_status) lateinit var batteryStatusImageView: ImageView
+    @BindView(R.id.time) lateinit var timeTextView: TextView
+    @BindView(R.id.speed_value) lateinit var speedTextView: TextView
+    @BindView(R.id.speed_unit) lateinit var speedUnitTextView: TextView
+    @BindView(R.id.speed_max) lateinit var maxSpeedTextView: TextView
+    @BindView(R.id.speed_avg) lateinit var avgSpeedTextView: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         //activity.requestWindowFeature(Window.FEATURE_NO_TITLE);
         activity.window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
         activity.window.addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
-        activity.setContentView(R.layout.activity_main)
+        activity.setContentView(R.layout.activity_computer)
+        ButterKnife.bind(this, activity);
         //val decorView = activity.window.decorView
         //val uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_FULLSCREEN
         //decorView.setSystemUiVisibility(uiOptions)
-        menuImageView = activity.findViewById(R.id.menu) as ImageView
-        gpsStatusImageView = activity.findViewById(R.id.gps_status) as ImageView
-        batteryStatusImageView = activity.findViewById(R.id.battery_status) as ImageView
-        timeTextView = activity.findViewById(R.id.time) as TextView
-        speedTextView = activity.findViewById(R.id.speed_value) as TextView
-        speedUnitTextView = activity.findViewById(R.id.speed_unit) as TextView
 
-        drawerLayout = activity.findViewById(R.id.drawer) as DrawerLayout
-        navigationView = activity.findViewById(R.id.navigation) as NavigationView
         menuSettings = navigationView.menu.findItem(R.id.menu_settings)
         menuAbout = navigationView.menu.findItem(R.id.menu_about)
+        menuResetSpeed = navigationView.menu.findItem(R.id.menu_reset_speed)
 
         activityColor.created()
     }
@@ -94,6 +91,8 @@ class ComputerView(val activity: Activity) : ComputerContracts.View {
 
     override fun userToAbout() = menuAbout.clicks()
 
+    override fun userResetSpeed() = menuResetSpeed.clicks()
+
     override fun userLocation() = gpsStatusImageView.clicks()
 
     override fun menuShow() {
@@ -114,7 +113,7 @@ class ComputerView(val activity: Activity) : ComputerContracts.View {
         when (gpsStatus) {
             GpsStatus.OK -> {
                 gpsStatusImageView.setImageResource(R.drawable.ic_location_on)
-                val color = activity.getColorByAttrId(android.R.attr.text)
+                val color = activity.getColorByAttrId(R.attr.velColorNormal)
                 gpsStatusImageView.setColorFilter(color)
             }
             GpsStatus.ERROR -> {

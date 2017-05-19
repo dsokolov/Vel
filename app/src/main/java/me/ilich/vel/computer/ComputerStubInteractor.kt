@@ -1,6 +1,7 @@
 package me.ilich.vel.computer
 
 import android.os.Bundle
+import me.ilich.vel.MpsSpeed
 import me.ilich.vel.model.BatteryStatus
 import me.ilich.vel.model.Theme
 import me.ilich.vel.model.sources.LocationEntity
@@ -33,7 +34,7 @@ class ComputerStubInteractor(val activity: ComputerActivity) : ComputerContracts
                 }
             }
 
-    override fun location(): Observable<LocationEntity> = Observable.interval(0L, 200L, TimeUnit.MILLISECONDS)
+    override fun location(): Observable<LocationEntity> = Observable.interval(0L, 500L, TimeUnit.MILLISECONDS)
             .subscribeOn(Schedulers.computation())
             .observeOn(Schedulers.computation())
             .map {
@@ -48,4 +49,15 @@ class ComputerStubInteractor(val activity: ComputerActivity) : ComputerContracts
                 val percents = it % 100
                 BatteryStatus(percents.toInt(), false)
             }
+
+    override fun speedCurrent(): Observable<MpsSpeed> = Observable.just(60f)
+
+    override fun speedMax(): Observable<MpsSpeed> = Observable.just(120f)
+
+    override fun speedAvg(): Observable<MpsSpeed> = Observable.just(45f)
+
+    override fun speedReset(): Observable<Unit> {
+        TODO("implement speedReset")
+    }
+
 }

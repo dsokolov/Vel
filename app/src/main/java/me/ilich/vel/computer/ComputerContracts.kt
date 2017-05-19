@@ -1,6 +1,7 @@
 package me.ilich.vel.computer
 
 import android.os.Bundle
+import me.ilich.vel.MpsSpeed
 import me.ilich.vel.model.BatteryStatus
 import me.ilich.vel.model.GpsStatus
 import me.ilich.vel.model.Theme
@@ -25,6 +26,7 @@ object ComputerContracts {
         fun updateSpeedUnit(unitResIt: Int)
         fun userToSettings(): Observable<Unit>
         fun userToAbout(): Observable<Unit>
+        fun userResetSpeed(): Observable<Unit>
         fun userMenu(): Observable<Unit>
         fun userLocation(): Observable<Unit>
         fun menuShow()
@@ -39,8 +41,12 @@ object ComputerContracts {
         fun time(): Observable<Date>
         fun speedUnitObservable(): Observable<SpeedUnitEntity>
         fun location(): Observable<LocationEntity>
+        fun speedCurrent(): Observable<MpsSpeed>
+        fun speedMax(): Observable<MpsSpeed>
+        fun speedAvg(): Observable<MpsSpeed>
         fun themeObservable(): Observable<Theme>
         fun batteryStatus(): Observable<BatteryStatus>
+        fun speedReset(): Observable<Unit>
     }
 
     interface Presenter : Contracts.Presenter {

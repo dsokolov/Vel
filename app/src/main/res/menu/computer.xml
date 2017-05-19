@@ -7,6 +7,11 @@
         android:title="@string/menu_settings" />
 
     <item
+        android:id="@+id/menu_reset_speed"
+        android:icon="@drawable/ic_exposure_zero"
+        android:title="@string/menu_reset_speed" />
+
+    <item
         android:id="@+id/menu_about"
         android:icon="@drawable/ic_help"
         android:title="@string/menu_about" />

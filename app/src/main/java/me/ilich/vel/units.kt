@@ -6,7 +6,6 @@ import android.support.annotation.ColorInt
 import android.util.TypedValue
 
 typealias MpsSpeed = Float
-typealias KmphSpeed = Float
 typealias Latitude = Double
 typealias Longitude = Double
 typealias RollDegree = Float
