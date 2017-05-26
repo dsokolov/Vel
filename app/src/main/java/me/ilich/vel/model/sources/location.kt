@@ -24,9 +24,10 @@ fun locationObservable(context: Context): Observable<LocationEntity> {
     val locationRequest = LocationRequest.create()
             .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
             .setInterval(100L)
-    return locationProvider.getUpdatedLocation(locationRequest).
-            subscribeOn(Schedulers.io()).
-            map { location ->
+    return locationProvider.getUpdatedLocation(locationRequest)
+            .subscribeOn(Schedulers.io())
+            .observeOn(Schedulers.computation())
+            .map { location ->
                 LocationEntity(
                         latitude = location.latitude,
                         longitude = location.longitude,
@@ -36,6 +37,5 @@ fun locationObservable(context: Context): Observable<LocationEntity> {
                         provider = location.provider,
                         bearing = location.bearing
                 )
-            }.
-            subscribeOn(Schedulers.computation())
+            }
 }

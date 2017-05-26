@@ -4,21 +4,20 @@ import android.Manifest
 import android.app.Activity
 import android.os.Bundle
 import android.preference.PreferenceManager
+import android.util.Log
 import com.f2prateek.rx.preferences.RxSharedPreferences
 import com.tbruyelle.rxpermissions.RxPermissions
-import io.realm.Realm
 import me.ilich.vel.MpsSpeed
 import me.ilich.vel.R
 import me.ilich.vel.model.BatteryStatus
 import me.ilich.vel.model.Theme
 import me.ilich.vel.model.realm.RealmMotion
 import me.ilich.vel.model.realm.RealmSpeedSummary
-import me.ilich.vel.model.realm.transactionObservable
 import me.ilich.vel.model.sources.LocationEntity
 import me.ilich.vel.model.sources.locationObservable
 import me.ilich.vel.model.sources.themeObservable
+import me.ilich.vel.realm.RealmWrapper
 import rx.Observable
-import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
 import java.util.*
 import java.util.concurrent.TimeUnit
@@ -34,17 +33,17 @@ class ComputerInteractor(val activity: Activity) : ComputerContracts.Interactor 
     }
 
     private lateinit var rxPermissions: RxPermissions
-    private lateinit var realm: Realm
+    private val realmWrapper = RealmWrapper()
     private lateinit var preferences: RxSharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         rxPermissions = RxPermissions(activity)
-        realm = Realm.getDefaultInstance()
+        realmWrapper.init().subscribe()
         preferences = RxSharedPreferences.create(PreferenceManager.getDefaultSharedPreferences(activity))
     }
 
     override fun onDestroy() {
-        realm.close()
+        realmWrapper.close().subscribe()
     }
 
     override fun permissions(): Observable<Boolean> = rxPermissions.request(*PERMISSIONS)
@@ -83,29 +82,41 @@ class ComputerInteractor(val activity: Activity) : ComputerContracts.Interactor 
     }
 
     override fun speedCurrent(): Observable<MpsSpeed> =
-            realm.where(RealmSpeedSummary::class.java)
-                    .findAllAsync()
-                    .asObservable()
+            realmWrapper.realm()
+                    .flatMap { realm ->
+                        realm.where(RealmSpeedSummary::class.java)
+                                .findAllAsync()
+                                .asObservable()
+                    }
                     .map { it.firstOrNull()?.speedLast ?: 0f }
-                    .subscribeOn(AndroidSchedulers.mainThread())
+                    .doOnNext {
+                        Log.v("Sokolov", "C speed = $it")
+                    }
 
     override fun speedMax(): Observable<MpsSpeed> =
-            realm.where(RealmSpeedSummary::class.java)
-                    .findAllAsync()
-                    .asObservable()
+            realmWrapper.realm()
+                    .flatMap { realm ->
+                        realm.where(RealmSpeedSummary::class.java)
+                                .findAllAsync()
+                                .asObservable()
+                    }
                     .map { it.firstOrNull()?.speedMax ?: 0f }
-                    .subscribeOn(AndroidSchedulers.mainThread())
 
     override fun speedAvg(): Observable<MpsSpeed> =
-            realm.where(RealmSpeedSummary::class.java)
-                    .findAllAsync()
-                    .asObservable()
+            realmWrapper.realm()
+                    .flatMap { realm ->
+                        realm.where(RealmSpeedSummary::class.java)
+                                .findAllAsync()
+                                .asObservable()
+                    }
                     .map { it.firstOrNull()?.speedAvg ?: 0f }
-                    .subscribeOn(AndroidSchedulers.mainThread())
 
     override fun speedReset(): Observable<Unit> =
-            realm.transactionObservable { realm ->
-                realm.delete(RealmSpeedSummary::class.java)
-                realm.delete(RealmMotion::class.java)
+            realmWrapper.exec { realm ->
+                realm.executeTransaction { realm ->
+                    realm.delete(RealmSpeedSummary::class.java)
+                    realm.delete(RealmMotion::class.java)
+                }
             }
+
 }

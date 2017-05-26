@@ -7,8 +7,10 @@ import android.os.Bundle
 import android.os.IBinder
 import android.support.annotation.StringRes
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import me.ilich.vel.VelService
 import me.ilich.vel.model.GpsStatus
+import me.ilich.vel.realm.RealmSchedulers
 import rx.Observable
 import rx.Subscription
 import rx.android.schedulers.AndroidSchedulers
@@ -61,7 +63,10 @@ class ComputerActivity : AppCompatActivity() {
                                 router.about()
                                 view.menuHide()
                             }
-                            view.userResetSpeed().flatMap { interactor.speedReset() }.subscribe { view.menuHide() }
+                            view.userResetSpeed()
+                                    .flatMap { interactor.speedReset() }
+                                    .observeOn(AndroidSchedulers.mainThread())
+                                    .subscribe { view.menuHide() }
                             view.userMenu().subscribe { view.menuShow() }
                             viewInflated = true
                             subscribeStart()
@@ -99,9 +104,14 @@ class ComputerActivity : AppCompatActivity() {
         unbindService(serviceConnection)
         startSubscription?.unsubscribe()
         speedUnitSubscription?.unsubscribe()
-        currentSpeedSubscription?.unsubscribe()
-        maxSpeedSubscription?.unsubscribe()
-        avgSpeedSubscription?.unsubscribe()
+        Observable.just(Unit)
+                .subscribeOn(RealmSchedulers.getInstance())
+                .doOnNext {
+                    currentSpeedSubscription?.unsubscribe()
+                    maxSpeedSubscription?.unsubscribe()
+                    avgSpeedSubscription?.unsubscribe()
+                }
+                .subscribe()
     }
 
     override fun onBackPressed() {
@@ -140,6 +150,7 @@ class ComputerActivity : AppCompatActivity() {
                     interactor.speedUnitObservable(),
                     interactor.speedCurrent()
             ) { unit, speed ->
+                Log.v("Sokolov", "B speed = $speed")
                 unit.convert(speed)
             }
                     .map { String.format("%.1f", it) }

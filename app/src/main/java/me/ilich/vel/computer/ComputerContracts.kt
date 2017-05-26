@@ -5,9 +5,7 @@ import me.ilich.vel.MpsSpeed
 import me.ilich.vel.model.BatteryStatus
 import me.ilich.vel.model.GpsStatus
 import me.ilich.vel.model.Theme
-import me.ilich.vel.model.sources.AccelerationEntity
 import me.ilich.vel.model.sources.LocationEntity
-import me.ilich.vel.model.sources.OrientationEntity
 import me.ilich.vel.viper.Contracts
 import rx.Observable
 import java.util.*
