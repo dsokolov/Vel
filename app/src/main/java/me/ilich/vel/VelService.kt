@@ -3,18 +3,18 @@ package me.ilich.vel
 import android.app.Service
 import android.content.Context
 import android.content.Intent
-import android.location.Location
 import android.os.Binder
 import android.os.IBinder
 import android.util.Log
 import io.realm.Sort
-import me.ilich.vel.model.realm.*
+import me.ilich.vel.model.realm.RealmMotion
+import me.ilich.vel.model.realm.RealmSpeedSummary
+import me.ilich.vel.model.realm.deleteUntilCount
+import me.ilich.vel.model.realm.firstOrCreate
+import me.ilich.vel.model.sources.locationObservable
 import me.ilich.vel.realm.RealmWrapper
-import rx.Observable
 import rx.schedulers.Schedulers
 import rx.subscriptions.CompositeSubscription
-import java.util.*
-import java.util.concurrent.TimeUnit
 
 class VelService : Service() {
 
@@ -34,23 +34,13 @@ class VelService : Service() {
         realm.init().subscribe {
             subs.addAll(
 
-                    Observable
-                            .interval(1000L, TimeUnit.MILLISECONDS)
-                            .map {
-                                val l = Location("A")
-                                l.speed = it.toFloat()
-                                l
-                            }
-                            //locationObservable(this)
+                    locationObservable(this)
                             .flatMap { location ->
                                 realm.exec { realm ->
                                     realm.executeTransaction { realm ->
                                         realm.deleteUntilCount(RealmMotion::class.java, 10000, "date", Sort.DESCENDING)
                                         val m = realm.createObject(RealmMotion::class.java)
-                                        //m.gpsSpeed = location.speed
-                                        val speed = Random().nextInt(100).toFloat()
-                                        Log.v("Sokolov", "A speed = $speed")
-                                        m.gpsSpeed = speed
+                                        m.gpsSpeed = location.speed
                                     }
                                 }
                             }
@@ -80,7 +70,6 @@ class VelService : Service() {
                                 val max = it.filter { it > 0f }
                                         .max() ?: 0f
                                 val last = it.firstOrNull() ?: 0f
-                                Log.v("Sokolov", "D speed = $last")
                                 SpeedSummary(avg, max, last)
                             }
                             .flatMap { (avg, max, last) ->
@@ -90,7 +79,6 @@ class VelService : Service() {
                                         s.speedMax = max
                                         s.speedAvg = avg
                                         s.speedLast = last
-                                        Log.v("Sokolov", "E speed = $last")
                                     }
                                 }
                             }

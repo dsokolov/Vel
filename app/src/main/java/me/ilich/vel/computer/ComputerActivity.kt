@@ -64,9 +64,13 @@ class ComputerActivity : AppCompatActivity() {
                                 view.menuHide()
                             }
                             view.userResetSpeed()
-                                    .flatMap { interactor.speedReset() }
+                                    .subscribeOn(AndroidSchedulers.mainThread())
                                     .observeOn(AndroidSchedulers.mainThread())
-                                    .subscribe { view.menuHide() }
+                                    .doOnNext { view.menuHide() }
+                                    .flatMap { view.showDialogSpeedReset() }
+                                    .filter { it }
+                                    .flatMap { interactor.speedReset() }
+                                    .subscribe()
                             view.userMenu().subscribe { view.menuShow() }
                             viewInflated = true
                             subscribeStart()
@@ -150,7 +154,6 @@ class ComputerActivity : AppCompatActivity() {
                     interactor.speedUnitObservable(),
                     interactor.speedCurrent()
             ) { unit, speed ->
-                Log.v("Sokolov", "B speed = $speed")
                 unit.convert(speed)
             }
                     .map { String.format("%.1f", it) }

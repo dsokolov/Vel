@@ -32,6 +32,7 @@ object ComputerContracts {
         fun isMenuVisible(): Boolean
         fun configureLogger()
         fun updateTheme(theme: Theme)
+        fun showDialogSpeedReset(): Observable<Boolean>
     }
 
     interface Interactor : Contracts.Interactor {

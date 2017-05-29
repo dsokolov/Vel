@@ -89,9 +89,6 @@ class ComputerInteractor(val activity: Activity) : ComputerContracts.Interactor 
                                 .asObservable()
                     }
                     .map { it.firstOrNull()?.speedLast ?: 0f }
-                    .doOnNext {
-                        Log.v("Sokolov", "C speed = $it")
-                    }
 
     override fun speedMax(): Observable<MpsSpeed> =
             realmWrapper.realm()

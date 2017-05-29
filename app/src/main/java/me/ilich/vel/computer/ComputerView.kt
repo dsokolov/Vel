@@ -19,9 +19,10 @@ import me.ilich.vel.getColorByAttrId
 import me.ilich.vel.model.BatteryStatus
 import me.ilich.vel.model.GpsStatus
 import me.ilich.vel.model.Theme
+import rx.Observable
 
 
-class ComputerView(val activity: Activity) : ComputerContracts.View {
+class ComputerView(val activity: ComputerActivity) : ComputerContracts.View {
 
     private val activityColor = ActivityColor(activity)
 
@@ -166,4 +167,7 @@ class ComputerView(val activity: Activity) : ComputerContracts.View {
         }
     }
 
+    override fun showDialogSpeedReset(): Observable<Boolean> {
+        return ResetSpeedDialogFragment.show(activity.supportFragmentManager)
+    }
 }
