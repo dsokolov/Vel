@@ -32,7 +32,9 @@ object ComputerContracts {
         fun menuHide()
         fun isMenuVisible(): Boolean
         //fun configureLogger()
-        fun showDialogSpeedReset(): Observable<Boolean>
+        fun showDialogSpeedReset()
+
+        var resetSpeedDialogObservable: Observable<Boolean>?
     }
 
     interface Interactor : Contracts.Interactor {

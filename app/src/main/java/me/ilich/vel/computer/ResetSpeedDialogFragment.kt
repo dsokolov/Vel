@@ -18,12 +18,9 @@ class ResetSpeedDialogFragment : DialogFragment() {
 
         private const val TAG = "speed reset dialog"
 
-        fun show(fm: FragmentManager): Observable<Boolean> {
+        fun show(fm: FragmentManager) {
             val d = ResetSpeedDialogFragment()
             d.show(fm, TAG)
-            return Observable.unsafeCreate<Boolean> { subsctiber ->
-                d.subscriber = subsctiber
-            }
         }
 
     }
@@ -31,6 +28,14 @@ class ResetSpeedDialogFragment : DialogFragment() {
     private lateinit var subscriber: Subscriber<in Boolean>
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        val observable = Observable.unsafeCreate<Boolean> { subs ->
+            subscriber = subs
+        }
+        activity.let {
+            if (it is Callback) {
+                (activity as Callback).onObservable(observable)
+            }
+        }
         val d = AlertDialog.Builder(context)
                 .setTitle(R.string.dialog_speed_reset_title)
                 .setMessage(R.string.dialog_speed_reset_message)
@@ -57,6 +62,10 @@ class ResetSpeedDialogFragment : DialogFragment() {
         super.onDismiss(dialog)
         Log.v("Sokolov", "onDismiss")
         subscriber.onCompleted()
+    }
+
+    interface Callback {
+        fun onObservable(observable: Observable<Boolean>)
     }
 
 }

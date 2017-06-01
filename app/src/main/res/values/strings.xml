@@ -58,6 +58,9 @@
     <string name="dialog_speed_reset_title">Speed reset</string>
     <string name="dialog_speed_reset_message">Are you sure reset average and max speed values?</string>
     <string name="cd_menu">Menu</string>
+    <string name="cd_logo">Logo</string>
+    <string name="about_version">ver. %1$s (%2$d)</string>
+    <string name="about_rate">Rate app</string>
     <string-array name="preference_pitch_entities">
         <item>@string/preference_pitch_entry_degree</item>
         <item>@string/preference_pitch_entry_percent</item>

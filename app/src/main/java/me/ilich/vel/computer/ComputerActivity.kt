@@ -16,7 +16,7 @@ import rx.subscriptions.CompositeSubscription
 import java.text.SimpleDateFormat
 import java.util.*
 
-class ComputerActivity : AppCompatActivity() {
+class ComputerActivity : AppCompatActivity(), ResetSpeedDialogFragment.Callback {
 
     companion object {
         private val SDF = SimpleDateFormat("HH:mm", Locale.getDefault())
@@ -64,7 +64,8 @@ class ComputerActivity : AppCompatActivity() {
                                     .subscribeOn(AndroidSchedulers.mainThread())
                                     .observeOn(AndroidSchedulers.mainThread())
                                     .doOnNext { view.menuHide() }
-                                    .flatMap { view.showDialogSpeedReset() }
+                                    .doOnNext { view.showDialogSpeedReset() }
+                                    .flatMap { view.resetSpeedDialogObservable }
                                     .filter { it }
                                     .flatMap { interactor.speedReset() }
                                     .subscribe()
@@ -201,5 +202,8 @@ class ComputerActivity : AppCompatActivity() {
             @StringRes val speedUnit: Int
     )*/
 
+    override fun onObservable(observable: Observable<Boolean>) {
+        view.resetSpeedDialogObservable = observable
+    }
 
 }

@@ -19,6 +19,8 @@ import rx.Observable
 
 class ComputerView(val activity: ComputerActivity) : ComputerContracts.View {
 
+    override var resetSpeedDialogObservable: Observable<Boolean>? = null
+
     private val activityColor = ActivityColor(activity)
 
     @BindView(R.id.drawer) lateinit var drawerLayout: DrawerLayout
@@ -153,7 +155,7 @@ class ComputerView(val activity: ComputerActivity) : ComputerContracts.View {
         }
     }*/
 
-    override fun showDialogSpeedReset(): Observable<Boolean> {
-        return ResetSpeedDialogFragment.show(activity.supportFragmentManager)
+    override fun showDialogSpeedReset() {
+        ResetSpeedDialogFragment.show(activity.supportFragmentManager)
     }
 }
