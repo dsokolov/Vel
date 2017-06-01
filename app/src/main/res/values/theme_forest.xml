@@ -5,22 +5,18 @@
 
     <string name="theme_forest_title">Forest</string>
 
-    <color name="theme_forest_primary">#259b24</color>
-    <color name="theme_forest_primary_dark">#0a7e07</color>
-    <color name="theme_forest_accent">#5af158</color>
-    <color name="theme_forest_background">#e4ffe3</color>
-    <color name="theme_forest_normal">#259b24</color>
+    <color name="theme_forest_velColorPrimary">#259b24</color>
+    <color name="theme_forest_velColorPrimaryDark">#0a7e07</color>
+    <color name="theme_forest_velColorAccent">#5af158</color>
+    <color name="theme_forest_velColorBackground">#effaef</color>
+    <color name="theme_forest_velTextColorPrimary">#00142b</color>
 
     <style name="AppTheme.Forest" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="colorPrimary">@color/theme_forest_primary</item>
-        <item name="colorPrimaryDark">@color/theme_forest_primary_dark</item>
-        <item name="colorAccent">@color/theme_forest_accent</item>
-        <item name="velColorNormal">@color/theme_forest_normal</item>
-        <item name="velColorBackground">@color/theme_forest_background</item>
-        <item name="velColorLevelGray">@color/level_gray</item>
-        <item name="velColorLevelGreen">@color/theme_forest_normal</item>
-        <item name="velColorLevelYellow">@color/theme_forest_accent</item>
-        <item name="velColorLevelRed">@color/level_red</item>
+        <item name="colorPrimary">@color/theme_forest_velColorPrimary</item>
+        <item name="colorPrimaryDark">@color/theme_forest_velColorPrimaryDark</item>
+        <item name="colorAccent">@color/theme_forest_velColorAccent</item>
+        <item name="android:colorBackground">@color/theme_forest_velColorBackground</item>
+        <item name="android:textColorPrimary">@color/theme_forest_velTextColorPrimary</item>
     </style>
 
 </resources>

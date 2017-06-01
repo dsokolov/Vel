@@ -2,7 +2,6 @@ package me.ilich.vel
 
 import android.app.Activity
 import android.os.Build
-import android.util.Log
 import me.ilich.vel.model.Theme
 
 class ActivityColor(val activity: Activity) {
@@ -20,8 +19,8 @@ class ActivityColor(val activity: Activity) {
             activity.setTheme(theme.themeResId)
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 val window = activity.window
-                window.statusBarColor = activity.getColorByAttrId(R.attr.velColorNormal)
-                window.navigationBarColor = activity.getColorByAttrId(R.attr.velColorNormal)
+                window.statusBarColor = activity.getColorByAttrId(R.attr.colorPrimaryDark)
+                window.navigationBarColor = activity.getColorByAttrId(R.attr.colorPrimaryDark)
             }
         }
     }

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <attr name="velColorPrimary" format="color" />
+    <attr name="velColorPrimaryDark" format="color" />
+    <attr name="velColorAccent" format="color" />
+    <attr name="velColorBackground" format="color" />
+    <attr name="velTextColorPrimary" format="color" />
+
+    <color name="default_velColorPrimary">#5677fc</color>
+    <color name="default_velColorPrimaryDark">#455ede</color>
+    <color name="default_velColorAccent">#64ffda</color>
+    <color name="default_velColorBackground">#f1f1ff</color>
+    <color name="default_velTextColorPrimary">#00142b</color>
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/default_velColorPrimary</item>
+        <item name="colorPrimaryDark">@color/default_velColorPrimaryDark</item>
+        <item name="colorAccent">@color/default_velColorAccent</item>
+        <item name="android:colorBackground">@color/default_velColorBackground</item>
+        <item name="android:textColorPrimary">@color/default_velTextColorPrimary</item>
+    </style>
+
+</resources>

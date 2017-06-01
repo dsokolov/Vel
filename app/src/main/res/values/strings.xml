@@ -57,6 +57,7 @@
     <string name="about_text_1">VEL</string>
     <string name="dialog_speed_reset_title">Speed reset</string>
     <string name="dialog_speed_reset_message">Are you sure reset average and max speed values?</string>
+    <string name="cd_menu">Menu</string>
     <string-array name="preference_pitch_entities">
         <item>@string/preference_pitch_entry_degree</item>
         <item>@string/preference_pitch_entry_percent</item>

@@ -4,12 +4,10 @@ import android.Manifest
 import android.app.Activity
 import android.os.Bundle
 import android.preference.PreferenceManager
-import android.util.Log
 import com.f2prateek.rx.preferences.RxSharedPreferences
 import com.tbruyelle.rxpermissions.RxPermissions
 import me.ilich.vel.MpsSpeed
 import me.ilich.vel.R
-import me.ilich.vel.model.BatteryStatus
 import me.ilich.vel.model.Theme
 import me.ilich.vel.model.realm.RealmMotion
 import me.ilich.vel.model.realm.RealmSpeedSummary
@@ -77,9 +75,9 @@ class ComputerInteractor(val activity: Activity) : ComputerContracts.Interactor 
 
     override fun themeObservable(): Observable<Theme> = themeObservable(activity)
 
-    override fun batteryStatus(): Observable<BatteryStatus> {
+/*    override fun batteryStatus(): Observable<BatteryStatus> {
         TODO("implement batteryStatus")
-    }
+    }*/
 
     override fun speedCurrent(): Observable<MpsSpeed> =
             realmWrapper.realm()

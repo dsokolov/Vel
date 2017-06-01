@@ -1,6 +1,5 @@
 package me.ilich.vel.computer
 
-import android.app.Activity
 import android.os.Bundle
 import android.support.design.widget.NavigationView
 import android.support.v4.widget.DrawerLayout
@@ -14,10 +13,6 @@ import butterknife.ButterKnife
 import com.jakewharton.rxbinding.view.clicks
 import me.ilich.vel.ActivityColor
 import me.ilich.vel.R
-import me.ilich.vel.configureLoggerPath
-import me.ilich.vel.getColorByAttrId
-import me.ilich.vel.model.BatteryStatus
-import me.ilich.vel.model.GpsStatus
 import me.ilich.vel.model.Theme
 import rx.Observable
 
@@ -33,8 +28,6 @@ class ComputerView(val activity: ComputerActivity) : ComputerContracts.View {
     private lateinit var menuResetSpeed: MenuItem
 
     @BindView(R.id.menu) lateinit var menuImageView: ImageView
-    @BindView(R.id.gps_status) lateinit var gpsStatusImageView: ImageView
-    @BindView(R.id.battery_status) lateinit var batteryStatusImageView: ImageView
     @BindView(R.id.time) lateinit var timeTextView: TextView
     @BindView(R.id.speed_value) lateinit var speedTextView: TextView
     @BindView(R.id.speed_unit) lateinit var speedUnitTextView: TextView
@@ -42,15 +35,10 @@ class ComputerView(val activity: ComputerActivity) : ComputerContracts.View {
     @BindView(R.id.speed_avg) lateinit var avgSpeedTextView: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        //activity.requestWindowFeature(Window.FEATURE_NO_TITLE);
         activity.window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
         activity.window.addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
         activity.setContentView(R.layout.activity_computer)
-        ButterKnife.bind(this, activity);
-        //val decorView = activity.window.decorView
-        //val uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_FULLSCREEN
-        //decorView.setSystemUiVisibility(uiOptions)
-
+        ButterKnife.bind(this, activity)
         menuSettings = navigationView.menu.findItem(R.id.menu_settings)
         menuAbout = navigationView.menu.findItem(R.id.menu_about)
         menuResetSpeed = navigationView.menu.findItem(R.id.menu_reset_speed)
@@ -94,8 +82,6 @@ class ComputerView(val activity: ComputerActivity) : ComputerContracts.View {
 
     override fun userResetSpeed() = menuResetSpeed.clicks()
 
-    override fun userLocation() = gpsStatusImageView.clicks()
-
     override fun menuShow() {
         drawerLayout.openDrawer(Gravity.START)
     }
@@ -106,11 +92,11 @@ class ComputerView(val activity: ComputerActivity) : ComputerContracts.View {
 
     override fun isMenuVisible() = drawerLayout.isDrawerOpen(Gravity.START)
 
-    override fun configureLogger() {
+/*    override fun configureLogger() {
         activity.configureLoggerPath()
-    }
+    }*/
 
-    override fun updateGpsStatus(gpsStatus: GpsStatus) {
+/*    override fun updateGpsStatus(gpsStatus: GpsStatus) {
         when (gpsStatus) {
             GpsStatus.OK -> {
                 gpsStatusImageView.setImageResource(R.drawable.ic_location_on)
@@ -128,9 +114,9 @@ class ComputerView(val activity: ComputerActivity) : ComputerContracts.View {
                 gpsStatusImageView.setColorFilter(color)
             }
         }
-    }
+    }*/
 
-    override fun updateBatteryStatus(batteryStatus: BatteryStatus) {
+/*    override fun updateBatteryStatus(batteryStatus: BatteryStatus) {
         when (batteryStatus.level) {
             in 0..20 -> {
                 batteryStatusImageView.setImageResource(R.drawable.ic_battery_20)
@@ -165,7 +151,7 @@ class ComputerView(val activity: ComputerActivity) : ComputerContracts.View {
                 batteryStatusImageView.setColorFilter(activity.getColorByAttrId(R.attr.velColorLevelGray))
             }
         }
-    }
+    }*/
 
     override fun showDialogSpeedReset(): Observable<Boolean> {
         return ResetSpeedDialogFragment.show(activity.supportFragmentManager)

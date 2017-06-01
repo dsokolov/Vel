@@ -15,9 +15,11 @@ class SettingsView(val activity: SettingsActivity) : SettingsContract.View {
         val toolbar = activity.findViewById(R.id.toolbar) as Toolbar
         activity.setSupportActionBar(toolbar)
         activity.supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        activity.fragmentManager.beginTransaction().
-                replace(R.id.content, SettingsFragment.newInstance()).
-                commit()
+        if (savedInstanceState == null) {
+            activity.fragmentManager.beginTransaction().
+                    replace(R.id.content, SettingsFragment.newInstance()).
+                    commit()
+        }
         activityColor.created()
     }
 

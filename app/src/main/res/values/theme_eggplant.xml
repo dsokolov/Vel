@@ -5,15 +5,18 @@
 
     <string name="theme_eggplant_title">Eggplant</string>
 
-    <color name="theme_eggplant_primary">#673ab7</color>
-    <color name="theme_eggplant_primary_dark">#512da8</color>
-    <color name="theme_eggplant_accent">#ff5177</color>
-    <color name="theme_eggplant_background">#e2d5fa</color>
+    <color name="theme_eggplant_velColorPrimary">#673ab7</color>
+    <color name="theme_eggplant_velColorPrimaryDark">#512da8</color>
+    <color name="theme_eggplant_velColorAccent">#ff5177</color>
+    <color name="theme_eggplant_velColorBackground">#f7f5fa</color>
+    <color name="theme_eggplant_velTextColorPrimary">#00142b</color>
 
     <style name="AppTheme.Eggplant" parent="Theme.AppCompat.NoActionBar">
-        <item name="colorPrimary">@color/theme_eggplant_primary</item>
-        <item name="colorPrimaryDark">@color/theme_eggplant_primary_dark</item>
-        <item name="colorAccent">@color/theme_eggplant_accent</item>
+        <item name="colorPrimary">@color/theme_eggplant_velColorPrimary</item>
+        <item name="colorPrimaryDark">@color/theme_eggplant_velColorPrimaryDark</item>
+        <item name="colorAccent">@color/theme_eggplant_velColorAccent</item>
+        <item name="android:colorBackground">@color/theme_eggplant_velColorBackground</item>
+        <item name="android:textColorPrimary">@color/theme_eggplant_velTextColorPrimary</item>
     </style>
 
 </resources>

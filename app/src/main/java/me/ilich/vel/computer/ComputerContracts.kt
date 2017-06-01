@@ -15,8 +15,9 @@ object ComputerContracts {
     interface View {
         fun onCreate(savedInstanceState: Bundle?)
         fun onDestroy()
-        fun updateGpsStatus(gpsStatus: GpsStatus)
-        fun updateBatteryStatus(batteryStatus: BatteryStatus)
+        //fun updateGpsStatus(gpsStatus: GpsStatus)
+        //fun updateBatteryStatus(batteryStatus: BatteryStatus)
+        fun updateTheme(theme: Theme)
         fun updateTime(time: String)
         fun updateSpeedCurrent(speed: String)
         fun updateSpeedMax(speed: String)
@@ -26,12 +27,11 @@ object ComputerContracts {
         fun userToAbout(): Observable<Unit>
         fun userResetSpeed(): Observable<Unit>
         fun userMenu(): Observable<Unit>
-        fun userLocation(): Observable<Unit>
+        //fun userLocation(): Observable<Unit>
         fun menuShow()
         fun menuHide()
         fun isMenuVisible(): Boolean
-        fun configureLogger()
-        fun updateTheme(theme: Theme)
+        //fun configureLogger()
         fun showDialogSpeedReset(): Observable<Boolean>
     }
 
@@ -44,7 +44,7 @@ object ComputerContracts {
         fun speedMax(): Observable<MpsSpeed>
         fun speedAvg(): Observable<MpsSpeed>
         fun themeObservable(): Observable<Theme>
-        fun batteryStatus(): Observable<BatteryStatus>
+        //fun batteryStatus(): Observable<BatteryStatus>
         fun speedReset(): Observable<Unit>
     }
 

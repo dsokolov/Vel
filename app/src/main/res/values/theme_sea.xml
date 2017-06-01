@@ -1,19 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
 
     <string name="theme_sea_id" translatable="false">SEA</string>
 
     <string name="theme_sea_title">Sea</string>
 
-    <color name="theme_sea_primary">#00bcd4</color>
-    <color name="theme_sea_primary_dark">#0097a7</color>
-    <color name="theme_sea_accent">#6889ff</color>
-    <color name="theme_sea_background">#c2f8ff</color>
+    <color name="theme_sea_velColorPrimary">#00bcd4</color>
+    <color name="theme_sea_velColorPrimaryDark">#0097a7</color>
+    <color name="theme_sea_velColorAccent">#6889ff</color>
+    <color name="theme_sea_velColorBackground">#d9f8fc</color>
+    <color name="theme_sea_velTextColorPrimary">#00142b</color>
 
     <style name="AppTheme.Sea" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="colorPrimary">@color/theme_sea_primary</item>
-        <item name="colorPrimaryDark">@color/theme_sea_primary_dark</item>
-        <item name="colorAccent">@color/theme_sea_accent</item>
+        <item name="colorPrimary">@color/theme_sea_velColorPrimary</item>
+        <item name="colorPrimaryDark">@color/theme_sea_velColorPrimaryDark</item>
+        <item name="colorAccent">@color/theme_sea_velColorAccent</item>
+        <item name="android:colorBackground">@color/theme_sea_velColorBackground</item>
+        <item name="android:textColorPrimary">@color/theme_sea_velTextColorPrimary</item>
     </style>
 
 </resources>

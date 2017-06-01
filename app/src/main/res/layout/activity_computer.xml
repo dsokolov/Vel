@@ -17,8 +17,9 @@
             android:id="@+id/menu"
             android:layout_width="@dimen/icon_size"
             android:layout_height="@dimen/icon_size"
+            android:contentDescription="@string/cd_menu"
             android:src="@drawable/ic_menu"
-            android:tint="?attr/velColorNormal" />
+            android:tint="?attr/colorPrimaryDark" />
 
         <TextView
             android:id="@+id/time"
@@ -27,29 +28,10 @@
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:textAlignment="center"
+            android:textColor="?attr/colorPrimaryDark"
             android:textSize="@dimen/time_size"
             tools:ignore="RelativeOverlap"
             tools:text="12:34" />
-
-        <ImageView
-            android:id="@+id/battery_status"
-            android:layout_width="@dimen/icon_size"
-            android:layout_height="@dimen/icon_size"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:src="@drawable/ic_battery_50"
-            android:tint="?attr/velColorLevelRed" />
-
-        <ImageView
-            android:id="@+id/gps_status"
-            android:layout_width="@dimen/icon_size"
-            android:layout_height="@dimen/icon_size"
-            android:layout_alignParentTop="true"
-            android:layout_toLeftOf="@id/battery_status"
-            android:layout_toStartOf="@id/battery_status"
-            android:src="@drawable/ic_location_on"
-            android:tint="?attr/velColorNormal" />
 
         <TextView
             android:id="@+id/speed_value"
@@ -57,6 +39,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:textAlignment="center"
+            android:textColor="?attr/colorPrimaryDark"
             android:textSize="142sp"
             tools:text="23.5" />
 
@@ -68,6 +51,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="-24dp"
             android:gravity="center"
+            android:textColor="?attr/colorPrimaryDark"
             android:textSize="30sp"
             tools:text="km/h" />
 
@@ -80,6 +64,7 @@
             android:layout_below="@id/speed_value"
             android:layout_marginTop="-26dp"
             android:gravity="start"
+            android:textColor="?attr/colorPrimaryDark"
             android:textSize="21sp"
             tools:text="MAX\n99.9" />
 
@@ -92,6 +77,7 @@
             android:layout_below="@id/speed_value"
             android:layout_marginTop="-26dp"
             android:gravity="end"
+            android:textColor="?attr/colorPrimaryDark"
             android:textSize="21sp"
             tools:text="AVG\n23.4" />
 
@@ -102,11 +88,11 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:background="?attr/velColorBackground"
+        android:background="?android:attr/colorBackground"
         android:fitsSystemWindows="true"
-        app:itemBackground="?attr/velColorBackground"
-        app:itemIconTint="?attr/velColorNormal"
-        app:itemTextColor="?attr/velColorNormal"
+        app:itemBackground="?android:attr/colorBackground"
+        app:itemIconTint="?attr/colorPrimaryDark"
+        app:itemTextColor="?attr/colorPrimaryDark"
         app:menu="@menu/computer" />
 
 </android.support.v4.widget.DrawerLayout>

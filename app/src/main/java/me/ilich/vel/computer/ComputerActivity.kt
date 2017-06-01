@@ -5,11 +5,8 @@ import android.content.ComponentName
 import android.content.ServiceConnection
 import android.os.Bundle
 import android.os.IBinder
-import android.support.annotation.StringRes
 import android.support.v7.app.AppCompatActivity
-import android.util.Log
 import me.ilich.vel.VelService
-import me.ilich.vel.model.GpsStatus
 import me.ilich.vel.realm.RealmSchedulers
 import rx.Observable
 import rx.Subscription
@@ -131,7 +128,7 @@ class ComputerActivity : AppCompatActivity() {
                     observeOn(AndroidSchedulers.mainThread()).
                     subscribe {
                         if (it) {
-                            view.updateGpsStatus(GpsStatus.OK)
+                            //view.updateGpsStatus(GpsStatus.OK)
                             speedUnitSubscription?.unsubscribe()
                             speedUnitSubscription = speedUnitSubscription()
                             currentSpeedSubscription?.unsubscribe()
@@ -141,7 +138,7 @@ class ComputerActivity : AppCompatActivity() {
                             avgSpeedSubscription?.unsubscribe()
                             avgSpeedSubscription = avgSpeedSubscription()
                         } else {
-                            view.updateGpsStatus(GpsStatus.NEED_PERMISSION)
+                            //view.updateGpsStatus(GpsStatus.NEED_PERMISSION)
                         }
                     }
 
@@ -192,17 +189,17 @@ class ComputerActivity : AppCompatActivity() {
                         view.updateTime(SDF.format(it))
                     }
 
-    private fun batteryStatusSubscription() =
+/*    private fun batteryStatusSubscription() =
             interactor.batteryStatus()
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe {
                         view.updateBatteryStatus(it)
-                    }
+                    }*/
 
-    private data class SpeedEntity(
+/*    private data class SpeedEntity(
             val speedValue: String,
             @StringRes val speedUnit: Int
-    )
+    )*/
 
 
 }

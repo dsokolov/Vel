@@ -44,11 +44,11 @@ class ComputerStubInteractor(val activity: ComputerActivity) : ComputerContracts
 
     override fun themeObservable(): Observable<Theme> = me.ilich.vel.model.sources.themeObservable(activity)
 
-    override fun batteryStatus(): Observable<BatteryStatus> = Observable.interval(0L, 100L, TimeUnit.MILLISECONDS).
+/*    override fun batteryStatus(): Observable<BatteryStatus> = Observable.interval(0L, 100L, TimeUnit.MILLISECONDS).
             map {
                 val percents = it % 100
                 BatteryStatus(percents.toInt(), false)
-            }
+            }*/
 
     override fun speedCurrent(): Observable<MpsSpeed> = Observable.just(60f)
 
