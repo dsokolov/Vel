@@ -1,15 +1,15 @@
 package me.ilich.vel
 
-import android.content.Context
+/*import android.content.Context
 import ch.qos.logback.classic.Level
 import ch.qos.logback.classic.Logger
 import ch.qos.logback.classic.LoggerContext
 import ch.qos.logback.classic.util.ContextInitializer
 import ch.qos.logback.core.util.StatusPrinter
 import org.slf4j.LoggerFactory
-import java.io.File
+import java.io.File*/
 
-fun logger(clazz: Class<*>): org.slf4j.Logger {
+/*fun logger(clazz: Class<*>): org.slf4j.Logger {
     val className = clazz.name
     val packageName = "com.taktiklabs.skyguru"
     val loggerName = if (className.startsWith("com.taktiklabs.skyguru")) {
@@ -30,8 +30,9 @@ fun logger(name: String): org.slf4j.Logger {
         l.level = Level.OFF
     }
     return l
-}
+}*/
 
+/*
 fun Context.logPath(): File = getExternalFilesDir("logs") ?: File(filesDir, "logs")
 
 fun Context.configureLoggerPath() {
@@ -46,4 +47,4 @@ fun Context.configureLoggerPath() {
         e.printStackTrace()
     }
     StatusPrinter.printInCaseOfErrorsOrWarnings(lc)
-}
+}*/

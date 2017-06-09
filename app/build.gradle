@@ -13,10 +13,49 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+    packagingOptions {
+        exclude 'META-INF/rxjava.properties'
+    }
+    signingConfigs {
+        release {
+/*            storeFile file("file.keystore")
+            storePassword "storePassword"
+            keyAlias "alias"
+            keyPassword "keyPassword"*/
+        }
+        debug {
+            storeFile file("debug.keystore")
+            storePassword "android"
+            keyAlias "androiddebugkey"
+            keyPassword "android"
+        }
+    }
     buildTypes {
         release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            debuggable false
+            signingConfig signingConfigs.release
+            shrinkResources true
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard/general.pro"
+            proguardFiles fileTree(dir: 'proguard/libs', include: ['*.pro']).asList().toArray()
+            testProguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard/general.pro"
+            testProguardFile 'proguard-rules-test.pro'
+            testProguardFiles fileTree(dir: 'proguard/libs', include: ['*.pro']).asList().toArray()
+        }
+        optimized {
+            debuggable true
+            signingConfig signingConfigs.debug
+            shrinkResources true
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard/general.pro", "proguard/no-obfuscation.pro"
+            proguardFiles fileTree(dir: 'proguard/libs', include: ['*.pro']).asList().toArray()
+            testProguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard/general.pro", "proguard/no-obfuscation.pro"
+            testProguardFile 'proguard/test.pro'
+            testProguardFiles fileTree(dir: 'proguard/libs', include: ['*.pro']).asList().toArray()
+        }
+        debug {
+            debuggable true
+            signingConfig signingConfigs.debug
         }
     }
     configurations.all {
@@ -35,7 +74,7 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
 
-    compile 'com.google.android.gms:play-services-location:10.2.6'
+    compile 'com.google.android.gms:play-services-location:11.0.0'
     compile 'com.f2prateek.rx.preferences:rx-preferences:1.0.2'
 
     compile 'io.reactivex:rxjava:1.2.9'
@@ -48,20 +87,20 @@ dependencies {
     compile 'com.tbruyelle.rxpermissions:rxpermissions:0.9.1@aar'
 
     //region Logback & slf4j
-    compile 'org.slf4j:slf4j-api:1.7.21'
+/*    compile 'org.slf4j:slf4j-api:1.7.21'
     compile 'com.github.tony19:logback-android-core:1.1.1-6'
     compile('com.github.tony19:logback-android-classic:1.1.1-6') {
         // workaround issue #73
         exclude group: 'com.google.android', module: 'android'
-    }
+    }*/
     //endregion
 
     //region dagger2
-    compile 'com.google.dagger:dagger:2.11-rc2'
+/*    compile 'com.google.dagger:dagger:2.11-rc2'
     annotationProcessor 'com.google.dagger:dagger-compiler:2.11-rc2'
     compile 'com.google.dagger:dagger-android:2.11-rc2'
     compile 'com.google.dagger:dagger-android-support:2.11-rc2' // if you use the support libraries
-    annotationProcessor 'com.google.dagger:dagger-android-processor:2.11-rc2'
+    annotationProcessor 'com.google.dagger:dagger-android-processor:2.11-rc2'*/
     //endregion
 
     //region ButterKnife
@@ -71,6 +110,7 @@ dependencies {
 
     //region LeakCanary
     debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5.1'
+    optimizedCompile 'com.squareup.leakcanary:leakcanary-android:1.5.1'
     releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.1'
     testCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.1'
     //endregion

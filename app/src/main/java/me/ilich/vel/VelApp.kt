@@ -10,14 +10,15 @@ class VelApp : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        val a = AppUsedClass()
         if (LeakCanary.isInAnalyzerProcess(this)) {
             return;
         }
         LeakCanary.install(this);
         Realm.init(this)
         val realmCfg = RealmConfiguration.Builder().
-                deleteRealmIfMigrationNeeded().
-                build()
+            deleteRealmIfMigrationNeeded().
+            build()
         Realm.setDefaultConfiguration(realmCfg)
         ButterKnife.setDebug(BuildConfig.DEBUG)
     }
